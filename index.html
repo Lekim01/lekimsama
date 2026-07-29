@@ -5,18 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>¿Es correcto...?</title>
 
+<!-- Favicon — libro estilizado, sin archivo externo -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Crect x='7' y='4' width='14' height='22' rx='1.5' fill='none' stroke='%23e8e8e8' stroke-width='1.5'/%3E%3Crect x='10' y='4' width='1.5' height='22' fill='%23e8e8e8' opacity='0.18'/%3E%3Cline x1='10' y1='10' x2='19' y2='10' stroke='%23e8e8e8' stroke-width='1' opacity='0.45'/%3E%3Cline x1='10' y1='14' x2='19' y2='14' stroke='%23e8e8e8' stroke-width='1' opacity='0.45'/%3E%3Cline x1='10' y1='18' x2='15' y2='18' stroke='%23e8e8e8' stroke-width='1' opacity='0.45'/%3E%3Cpath d='M7 26 Q7 28 9 28 H23 Q25 28 25 26 V8' fill='none' stroke='%23e8e8e8' stroke-width='1.2' opacity='0.28'/%3E%3C%2Fsvg%3E">
+<!-- Fallback PNG para navegadores que no soporten SVG favicon -->
+<link rel="alternate icon" href="favicon.ico">
+
 <!-- Open Graph -->
-<meta property="og:title" content="¿Es correcto...?" />
-<meta property="og:description" content="Web oficial de la novela ¿Es correcto...?" />
-<meta property="og:image" content="https://i.imgur.com/hYziUXI.jpg" />
+<meta property="og:title" content="Página oficial de Lekim-sama" />
+<meta property="og:description" content="Página web oficial de Lekim-sama y sus novelas, generalmente de fantasía, misterio y tragedia." />
+<meta property="og:image" content="https://lekim01.github.io/Es-correcto-web/Miniatura.jpg" />
 <meta property="og:url" content="https://lekim01.github.io/Es-correcto-web/" />
 <meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="¿Es correcto...?" />
-<meta name="twitter:description" content="Web oficial de la novela ¿Es correcto...?" />
-<meta name="twitter:image" content="https://i.imgur.com/hYziUXI.jpg" />
+<meta name="twitter:title" content="Página oficial de Lekim-sama" />
+<meta name="twitter:description" content="Página web oficial de Lekim-sama y sus novelas, generalmente de fantasía, misterio y tragedia." />
+<meta name="twitter:image" content="https://lekim01.github.io/Es-correcto-web/Miniatura.jpg" />
+
+<!-- SEO básico -->
+<meta name="description" content="Página web oficial de Lekim-sama y sus novelas, generalmente de fantasía, misterio y tragedia." />
 <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
 <style>
 
@@ -30,11 +39,11 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Klee One', serif;
-  overflow-x: hidden;
 }
 
 /* ════════════════════ CURSOR TIP ════════════════════ */
@@ -242,6 +251,22 @@ nav {
 
 .sb-btn:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.6); }
 
+/* Títulos de sección del sidebar */
+.sb-section-title {
+  font-size: 0.7rem;
+  font-style: italic;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255,255,255,0.18);
+  padding: 0.55rem 0.2rem 0.35rem;
+  user-select: none;
+  display: block;
+  text-align: center;
+}
+
 /* ════════════════════ MAIN CONTENT ════════════════════ */
 #main-content {
   margin-left: var(--sidebar-w);
@@ -261,7 +286,7 @@ nav {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* ════════════════════ MUSIC ALERT NOTICE ════════════════════ */
@@ -333,9 +358,8 @@ nav {
   z-index: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 20px 120px;
-  /* El grid rotado 45° necesita espacio diagonal: limitamos para que no se salga */
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -501,8 +525,8 @@ nav {
 /* ════════════════════ ORDEN DE LECTURA ════════════════════ */
 #orden-lectura-wrapper {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 1.2rem;
+  left: 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -553,7 +577,7 @@ nav {
 }
 @keyframes ordenFadeIn {
   from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; }
 }
 #orden-lectura-panel p {
   font-size: 0.82rem;
@@ -582,6 +606,15 @@ nav {
 }
 
 /* ════════════════════ MODAL ════════════════════ */
+@keyframes modalOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modalBoxIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
 #modal-overlay {
   position: fixed;
   inset: 0;
@@ -592,7 +625,14 @@ nav {
   justify-content: center;
   padding: 2rem;
 }
-#modal-overlay.open { display: flex; }
+#modal-overlay.open {
+  display: flex;
+  animation: modalOverlayIn 0.2s ease both;
+}
+#modal-overlay.open .modal-box {
+  animation: modalBoxIn 0.25s ease both;
+  will-change: opacity, transform;
+}
 .modal-box {
   background: #0f0f0f;
   border: 1px solid rgba(255,255,255,0.2);
@@ -632,6 +672,18 @@ nav {
   padding-left: 0.7rem;
   margin-bottom: 0.9rem;
   line-height: 1.55;
+  transition: color 0.2s, border-color 0.2s;
+  user-select: none;
+}
+/* Estado hover: invita al clic */
+.modal-slogan[data-voz]:hover {
+  color: rgba(255,255,255,0.72);
+  border-left-color: rgba(255,255,255,0.45);
+}
+/* Estado reproduciendo */
+.modal-slogan.playing {
+  color: rgba(255,255,255,0.85);
+  border-left-color: rgba(255,255,255,0.7);
 }
 .modal-meta {
   display: flex; gap: 1rem;
@@ -724,6 +776,113 @@ nav {
 .collab-item:hover { border-color: rgba(255,255,255,0.8); }
 .collab-item:hover img { opacity: 1; }
 
+/* ════════════════════ COLLAB MODAL ════════════════════ */
+#collab-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+#collab-modal-overlay.open {
+  display: flex;
+  animation: modalOverlayIn 0.2s ease both;
+}
+#collab-modal-overlay.open #collab-modal-box {
+  animation: modalBoxIn 0.25s ease both;
+  will-change: opacity, transform;
+}
+
+#collab-modal-box {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.18);
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Cabecera: foto centrada, sin nombre */
+#collab-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 1.4rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+#collab-modal-photo {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.18);
+  display: block;
+}
+#collab-modal-name {
+  display: none;
+}
+
+/* Cuerpo: texto del agradecimiento */
+#collab-modal-body {
+  padding: 1.1rem 1.4rem 0.6rem;
+  max-height: 260px;
+  overflow-y: auto;
+}
+#collab-modal-body::-webkit-scrollbar { width: 3px; }
+#collab-modal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+#collab-modal-text {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.72);
+  font-style: italic;
+  white-space: pre-line;
+}
+
+/* Footer: botones */
+#collab-modal-footer {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 0.8rem;
+}
+.collab-modal-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.38);
+  font-family: 'Klee One', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.8rem 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: color 0.2s, background 0.2s;
+}
+.collab-modal-btn:last-child { border-right: none; }
+.collab-modal-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.collab-modal-btn:disabled,
+.collab-modal-btn[data-unavailable] {
+  opacity: 0.22;
+  cursor: default;
+  pointer-events: none;
+}
+#collab-modal-play-icon, #collab-modal-play2-icon { font-style: normal; font-size: 0.85rem; line-height: 1; }
+#collab-modal-play.playing, #collab-modal-play2.playing { color: rgba(255,255,255,0.75); }
+#collab-modal-play.playing #collab-modal-play-icon::before, #collab-modal-play2.playing #collab-modal-play2-icon::before { content: '■'; }
+#collab-modal-play:not(.playing) #collab-modal-play-icon::before, #collab-modal-play2:not(.playing) #collab-modal-play2-icon::before { content: '▶'; }
+
 .modal-actor {
   margin-top: 0.75rem;
   font-size: 0.82rem;
@@ -804,6 +963,78 @@ nav {
   flex: 1;
   height: 1px;
   background: rgba(255,255,255,0.1);
+}
+
+/* ════════════════════ SOBRE-MÍ ACORDEÓN ════════════════════ */
+
+/* Botón cabecera del acordeón — reutiliza la estética de sobre-block-label */
+.sobre-accordion-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-left: 3px solid rgba(255,255,255,0.12);
+  padding: 0.55rem 0.75rem 0.55rem 0.9rem;
+  cursor: pointer;
+  font-family: 'Klee One', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  text-align: left;
+  transition: border-color 0.22s, color 0.22s, background 0.22s;
+  margin-bottom: 0;
+  user-select: none;
+}
+.sobre-accordion-btn:hover {
+  border-left-color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.82);
+  background: rgba(255,255,255,0.03);
+}
+.sobre-accordion-btn.open {
+  border-left-color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.7);
+}
+
+/* Flecha indicadora */
+.sobre-accordion-arrow {
+  font-style: normal;
+  font-size: 0.65rem;
+  opacity: 0.5;
+  transition: transform 0.25s, opacity 0.25s;
+  flex-shrink: 0;
+  margin-left: 0.6rem;
+}
+.sobre-accordion-btn.open .sobre-accordion-arrow {
+  transform: rotate(180deg);
+  opacity: 0.8;
+}
+
+/* Panel colapsable */
+.sobre-accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+  margin-bottom: 0;
+}
+.sobre-accordion-panel.open {
+  grid-template-rows: 1fr;
+  margin-bottom: 0.5rem;
+}
+.sobre-accordion-panel > .sobre-accordion-inner {
+  overflow: hidden;
+  padding-top: 0;
+  transition: padding-top 0.25s;
+}
+.sobre-accordion-panel.open > .sobre-accordion-inner {
+  padding-top: 0.75rem;
+}
+
+/* Separador entre los dos acordeones */
+.sobre-accordion-gap {
+  height: 0.7rem;
 }
 
 ::-webkit-scrollbar { width: 4px; }
@@ -1364,6 +1595,651 @@ nav {
 
 /* Vista detalle */
 #aclaraciones-detail { padding-top: 0.2rem; }
+
+/* ════════════════════ SERIES COVER SCREEN ════════════════════ */
+
+/* Animación de entrada al cargar — solo opacity+translate, GPU-accelerated */
+@keyframes catalogFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; }
+}
+
+/* Transición de salida al hacer clic en la portada */
+@keyframes catalogFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Transición de entrada de los rombos */
+@keyframes rombosFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/*
+  Contenedor principal del catálogo de novelas.
+  Incluye título y cuadrícula de portadas.
+*/
+#series-cover-screen {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  padding: 40px 60px 50px;
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Fade-in suave al cargar */
+  animation: catalogFadeIn 0.55s ease both;
+  will-change: opacity, transform;
+}
+
+.grid-wrapper.entrando {
+  animation: rombosFadeIn 0.35s ease both;
+  will-change: opacity;
+}
+
+/* Título "Novelas actuales" */
+#catalog-title {
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 210, 60, 0.75);
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 210, 60, 0.35);
+  padding-bottom: 0.7rem;
+  width: 100%;
+  max-width: 560px;
+  user-select: none;
+}
+
+/* Fila de portadas de series */
+/* ── Carrusel foco ── */
+#catalog-covers-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  position: relative;
+}
+
+#focus-stage {
+  position: relative;
+  width: 315px;
+  height: 680px; /* imagen 420px + meta + botones */
+  flex-shrink: 0;
+}
+
+/* ── Indicadores (dots) ── */
+#carousel-dots {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+}
+.cdot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+.cdot.active {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.85);
+  transform: scale(1.15);
+}
+.cdot:hover:not(.active) {
+  border-color: rgba(255,210,60,0.7);
+}
+
+/* Cada tarjeta se posiciona con transform desde el centro del stage */
+.focus-card {
+  position: absolute;
+  top: 32px; /* espacio para los dots */
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* Tarjeta activa: centrada, tamaño completo */
+.focus-card.fc-active {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Tarjeta a la derecha: desplazada, reducida */
+.focus-card.fc-next {
+  transform: translateX(62%) scale(0.78);
+  opacity: 0.35;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Tarjeta a la izquierda: desplazada, reducida */
+.focus-card.fc-prev {
+  transform: translateX(-62%) scale(0.78);
+  opacity: 0.35;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Tarjetas fuera del rango visible: ocultas */
+.focus-card.fc-hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Botones: solo visibles en tarjeta activa */
+.card-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: fit-content;
+  transition: opacity 0.25s ease;
+}
+.focus-card:not(.fc-active) .card-btns {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Flechas de navegación del carrusel ── */
+.carousel-arrow {
+  position: absolute;
+  top: 242px; /* dots (~32px) + mitad imagen (210px) */
+  transform: translateY(-50%);
+  z-index: 20;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1rem 0.8rem;   /* área de clic amplia */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.38;
+  transition: opacity 0.25s ease, transform 0.22s ease;
+  user-select: none;
+  flex-shrink: 0;
+}
+.carousel-arrow:hover       { opacity: 1; }
+.carousel-arrow.hidden      { opacity: 0 !important; pointer-events: none; }
+.carousel-arrow:disabled    { opacity: 0; pointer-events: none; }
+
+#carousel-prev { left:  -3.2rem; }
+#carousel-next { right: -3.2rem; }
+
+#carousel-prev:hover { transform: translateY(-50%) translateX(-2px); }
+#carousel-next:hover { transform: translateY(-50%) translateX( 2px); }
+
+/* SVG de la flecha — chevron delgado y elegante */
+.carousel-arrow svg {
+  width: 18px;
+  height: 36px;
+  overflow: visible;
+}
+.carousel-arrow svg polyline {
+  fill: none;
+  stroke: rgba(255, 210, 60, 0.75);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.25s ease;
+}
+.carousel-arrow:hover svg polyline {
+  stroke: rgba(255, 210, 60, 1);
+}
+
+/*
+  Cada portada de serie individual.
+  Para añadir una segunda serie en el futuro, simplemente
+  duplica el bloque .serie-cover-item en el HTML.
+*/
+.serie-cover-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  user-select: none;
+}
+.serie-cover-item img:not(.cover-shop-btn img),
+.serie-cover-item .serie-cover-meta {
+  cursor: pointer;
+}
+
+/* Envuelve la portada y sus metadatos como una sola "pieza" clickeable/iluminable */
+.cover-hit-area {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 315px;
+  cursor: pointer;
+}
+
+/* Flecha sutil encima de la imagen que invita al clic */
+.serie-cover-arrow {
+  display: block;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.25);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  transition: color 0.25s, transform 0.25s;
+  pointer-events: none;
+  user-select: none;
+}
+.serie-cover-item:hover .serie-cover-arrow {
+  color: rgba(255,255,255,0.7);
+  transform: translateY(4px);
+}
+
+/* ── Botón Sinopsis ── */
+.btn-sinopsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.2rem;
+  margin-top: 0.75rem;
+  padding: 0.38rem 1.1rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.45);
+  font-family: 'Klee One', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  position: relative;
+  z-index: 2;
+}
+.btn-sinopsis:hover {
+  border-color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── Botón habilitar/deshabilitar sonidos hover ── */
+#btn-toggle-sound {
+  background: radial-gradient(ellipse 60% 90% at center, rgba(220,70,70,0.18), transparent 72%);
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Klee One', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+  width: 100%;
+}
+#btn-toggle-sound:hover {
+  background: radial-gradient(ellipse 60% 90% at center, rgba(220,70,70,0.32), transparent 72%);
+  color: rgba(255,255,255,0.95);
+}
+#btn-toggle-sound.sound-on {
+  background: radial-gradient(ellipse 60% 90% at center, rgba(70,130,220,0.18), transparent 72%);
+}
+#btn-toggle-sound.sound-on:hover {
+  background: radial-gradient(ellipse 60% 90% at center, rgba(70,130,220,0.32), transparent 72%);
+}
+
+
+.cover-shop-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  justify-content: center;
+}
+.cover-shop-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 315px;
+  height: 2.4rem;
+  box-sizing: border-box;
+  padding: 0;
+  background: radial-gradient(ellipse 55% 95% at center, rgba(240,200,60,0.22), transparent 72%);
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Klee One', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  position: relative;
+  z-index: 2;
+}
+.cover-shop-btn:hover {
+  background: radial-gradient(ellipse 55% 95% at center, rgba(240,200,60,0.4), transparent 72%);
+  color: rgba(255,255,255,0.95);
+}
+.cover-shop-btn img {
+  height: 1.4rem;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  border: none;
+  filter: none;
+  flex: 0 0 auto;
+}
+
+/* Cuando el ratón está sobre la imagen, ilumina el btn Ver más */
+.serie-cover-item.img-hovered .btn-sinopsis {
+  border-color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.05);
+}
+#sinopsis-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 3200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+}
+#sinopsis-overlay.open {
+  display: flex;
+  animation: modalOverlayIn 0.2s ease both;
+}
+#sinopsis-box {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.2);
+  max-width: 460px;
+  width: 100%;
+  padding: 2.2rem 2rem 1.8rem;
+  position: relative;
+  cursor: default;
+  animation: modalBoxIn 0.25s ease both;
+}
+#sinopsis-box .modal-close {
+  position: absolute;
+  top: 1rem; right: 1.2rem;
+}
+#sinopsis-text {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.82);
+  font-style: italic;
+  text-align: center;
+}
+
+/* La imagen de portada de la serie */
+.serie-cover-item img:not(.cover-shop-btn img) {
+  /* Proporción 3:4 igual que la ilustración (1152×1536) */
+  width: 315px;
+  height: 420px;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.2);
+  display: block;
+  transition: border-color 0.3s, opacity 0.3s;
+  /* Mismo efecto de imagen que los rombos */
+  filter: brightness(0.75);
+}
+.cover-hit-area:hover img:not(.cover-shop-btn img) {
+  border-color: rgba(255,255,255,0.85);
+  filter: brightness(1);
+}
+
+/* Imágenes dentro de los botones de tienda: no heredan estilos de portada */
+.cover-shop-btn img {
+  height: 1.4rem !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+  border: none !important;
+  filter: none !important;
+  transition: none;
+}
+
+/* Etiqueta de título de serie debajo de la portada */
+.serie-cover-label {
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  transition: color 0.25s;
+}
+.serie-cover-item:hover .serie-cover-label {
+  color: rgba(255,255,255,0.85);
+}
+
+/* Metadatos bajo la portada: páginas y géneros */
+.serie-cover-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.22rem;
+  margin-top: 0.75rem;
+  user-select: none;
+}
+.serie-cover-meta-pages {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3);
+  font-style: normal;
+  transition: color 0.25s;
+}
+.serie-cover-meta-genres {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.22);
+  font-style: italic;
+  transition: color 0.25s;
+}
+.cover-hit-area:hover .serie-cover-meta-pages  { color: rgba(255,255,255,0.55); }
+.cover-hit-area:hover .serie-cover-meta-genres { color: rgba(255,255,255,0.4); }
+
+/* ── Botón tráiler: fondo blanco difuminado, del ancho de la portada ── */
+.btn-trailer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 315px;
+  height: 2.4rem;
+  box-sizing: border-box;
+  margin-top: 0.6rem;
+  padding: 0;
+  background: radial-gradient(ellipse 55% 95% at center, rgba(255,255,255,0.16), transparent 72%);
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Klee One', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  position: relative;
+  z-index: 2;
+}
+.btn-trailer:hover {
+  background: radial-gradient(ellipse 55% 95% at center, rgba(255,255,255,0.32), transparent 72%);
+  color: rgba(255,255,255,0.95);
+}
+
+/* ── Modal tráiler ── */
+#trailer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 3100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+}
+#trailer-overlay.open {
+  display: flex;
+  animation: modalOverlayIn 0.2s ease both;
+}
+#trailer-box {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  background: #0a0a0a;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 2.8rem 1.5rem 1.5rem;
+  cursor: default;
+  animation: modalBoxIn 0.25s ease both;
+  will-change: opacity, transform;
+}
+/* Ratio 16:9 para el iframe */
+#trailer-video-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+#trailer-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+#trailer-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+#trailer-close:hover { color: #fff; }
+
+/* ── Placeholder "Próximamente" ── */
+.serie-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Pulso sutil del borde — solo box-shadow, sin tocar layout */
+@keyframes placeholderPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.0),  inset 0 0 40px rgba(0,0,0,0.6); }
+  50%  { box-shadow: 0 0 0 3px rgba(255,255,255,0.07), inset 0 0 40px rgba(0,0,0,0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.0),  inset 0 0 40px rgba(0,0,0,0.6); }
+}
+
+.serie-placeholder-card {
+  height: 420px;
+  width: 315px;
+  max-width: 315px;
+  background: rgba(10,10,10,0.82);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  position: relative;
+  overflow: hidden;
+  /* Pulso cada 3.5s — pausa larga para que no sea molesto */
+  animation: placeholderPulse 3.5s ease-in-out 1.2s infinite;
+  will-change: box-shadow;
+}
+
+/* Efecto de brillo sutil en las esquinas */
+.serie-placeholder-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+.serie-placeholder-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+}
+
+.serie-placeholder-icon {
+  opacity: 0.22;
+}
+
+.serie-placeholder-text {
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  font-style: normal;
+}
+
+/* Responsive: en pantallas estrechas las columnas se apilan */
+@media (max-width: 680px) {
+  #series-cover-screen {
+    padding: 30px 20px 40px;
+    gap: 1.4rem;
+  }
+  #catalog-covers-row {
+    gap: 1.8rem;
+  }
+  .serie-cover-item img,
+  .serie-placeholder-card {
+    height: 340px;
+    max-width: 240px;
+    width: 240px;
+  }
+}
+
+/* Botón "Volver a las series" — sutil, coherente con el estilo general */
+#btn-volver-series {
+  /* Debajo del botón Orden de lectura, dentro del wrapper fixed */
+  position: static;
+  margin-top: 0.6rem;
+  background: transparent;
+  border: none;
+  border-left: 3px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.35);
+  font-family: 'Klee One', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem 0.35rem 0.6rem;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  display: block;
+}
+#btn-volver-series:hover {
+  color: rgba(255,255,255,0.85);
+  border-left-color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.04);
+}
 .acl-back {
   display: inline-flex;
   align-items: center;
@@ -1423,6 +2299,7 @@ nav {
 <audio id="credit-actor-7" src="voz-3.mp3" preload="none"></audio>
 <audio id="credit-actor-8" src="voz-11.mp3" preload="none"></audio>
 <audio id="credit-actor-9" src="voz-12.mp3" preload="none"></audio>
+<audio id="credit-actor-12" src="voz-13.mp3" preload="none"></audio>
 <audio id="credit-actor-10" src="voz-6.mp3" preload="none"></audio>
 <audio id="credit-actor-11" src="voz-1.mp3" preload="none"></audio>
 <audio id="credit-compositor-1" src="compositor_1.mp3" preload="none"></audio>
@@ -1435,13 +2312,17 @@ nav {
 <audio id="credit-ilustrador-3" src="ilustrador_3.mp3" preload="none"></audio>
 <audio id="credit-ilustrador-4" src="ilustrador_4.mp3" preload="none"></audio>
 <audio id="extra-music-1" src="extra_music_1.mp3" preload="none"></audio>
+<audio id="credit-compositor-1-extra" src="Tadashii_goshikku.mp3" preload="none"></audio>
+<!-- ── Audio del lema general de la colección (para la portada de serie) ── -->
+<audio id="voz-13" src="voz-13.mp3" preload="none"></audio>
+<audio id="serie-es-correcto-hover" src="Tadashii_goshikku_portada.mp3" preload="none"></audio>
 
 <!-- ════════ NAVBAR ════════ -->
 <nav>
   <button id="menu-toggle" aria-label="Menú" onclick="toggleSidebar()">
     <span></span><span></span><span></span>
   </button>
-  <div class="nav-logo hov-sfx" onclick="goTo('novelas')"><span class="t-es">¿Es correcto...?</span><span class="t-en">Is it right...?</span><span class="t-ja">…は正しいか？</span></div>
+  <div class="nav-logo hov-sfx" onclick="goTo('novelas')"><span class="t-es">Lekim-sama</span><span class="t-en">Lekim-sama</span><span class="t-ja">Lekim-sama</span></div>
   <div class="nav-links">
     <a class="hov-sfx" onclick="goTo('novelas')">
       <span class="t-es">Novelas</span><span class="t-en">Novels</span><span class="t-ja">小説</span>
@@ -1477,18 +2358,39 @@ nav {
     </button>
   </div>
 
+  <div style="padding:0.4rem 0.6rem 0.6rem;display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.1);">
+    <button id="btn-toggle-sound" class="hov-sfx" onclick="toggleHoverSound()">
+      <span class="t-es">🔊 Activar/apagar sonido</span>
+      <span class="t-en">🔊 Turn sound on/off</span>
+      <span class="t-ja">🔊 サウンドのON/OFF</span>
+    </button>
+  </div>
+
+  <!-- Sección: Disponibles en -->
+  <span class="sb-section-title">
+    <span class="t-es">Disponibles en:</span>
+    <span class="t-en">Available on:</span>
+    <span class="t-ja">購入はこちら：</span>
+  </span>
   <a href="https://ko-fi.com/lekimsama" target="_blank" class="sb-btn btn-kofi hov-sfx">
-    <span class="t-es">Ko-fi<br><small style="opacity:0.6;font-size:0.78em">(Preferible por pack y precio)</small></span>
-    <span class="t-en">Ko-fi<br><small style="opacity:0.6;font-size:0.78em">(Preferable for bundle and price)</small></span>
-    <span class="t-ja">Ko-fi<br><small style="opacity:0.6;font-size:0.78em">（セットと価格の面で推奨）</small></span>
+    <span class="t-es">Ko-fi</span>
+    <span class="t-en">Ko-fi</span>
+    <span class="t-ja">Ko-fi</span>
   </a>
   <!-- Amazon: different links per language -->
-  <a id="amazon-btn" href="https://mybook.to/ECSNLESP" target="_blank" class="sb-btn btn-amazon hov-sfx">
-    <span class="t-es">Amazon<br><small style="opacity:0.6;font-size:0.78em">(Disponible en Kindle Unlimited)</small></span>
-    <span class="t-en">Amazon<br><small style="opacity:0.6;font-size:0.78em">(Available on Kindle Unlimited)</small></span>
-    <span class="t-ja">アマゾン<br><small style="opacity:0.6;font-size:0.78em">（Kindle Unlimitedで利用可能）</small></span>
-  </a>
+  <p style="font-size:0.72rem;line-height:1.5;color:rgba(255,255,255,0.38);font-style:italic;text-align:center;padding:0.3rem 0.6rem 0.5rem;">
+    <span class="t-es">Si quieres leer en otra plataforma, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeoRttt5NnAEXQnlHewwqoIzXXV9nBVGm05Mg-YowobahZ6kQ/viewform?usp=dialog" target="_blank" style="color:rgba(70,130,220,0.9);text-decoration:none">contáctame</a>.</span>
+    <span class="t-en">If you want to read on another platform, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeoRttt5NnAEXQnlHewwqoIzXXV9nBVGm05Mg-YowobahZ6kQ/viewform?usp=dialog" target="_blank" style="color:rgba(70,130,220,0.9);text-decoration:none">contact me</a>.</span>
+    <span class="t-ja">他のプラットフォームで読みたい場合は<a href="https://docs.google.com/forms/d/e/1FAIpQLSeoRttt5NnAEXQnlHewwqoIzXXV9nBVGm05Mg-YowobahZ6kQ/viewform?usp=dialog" target="_blank" style="color:rgba(70,130,220,0.9);text-decoration:none">ご連絡ください</a>。</span>
+  </p>
   <div class="sb-spacer"></div>
+
+  <!-- Sección: Redes sociales -->
+  <span class="sb-section-title">
+    <span class="t-es">Redes sociales</span>
+    <span class="t-en">Social media</span>
+    <span class="t-ja">ソーシャルメディア</span>
+  </span>
   <a class="sb-btn btn-youtube hov-sfx" href="https://www.youtube.com/@lekimsensei" target="_blank">
     <span class="t-es">YouTube</span>
     <span class="t-en">YouTube</span>
@@ -1512,13 +2414,6 @@ nav {
     <span class="t-en">ⓘ Clarifications</span>
     <span class="t-ja">ⓘ お知らせ</span>
   </a>
-  <div style="padding:0.85rem 0.6rem 0.4rem;border-top:1px solid rgba(255,255,255,0.1);">
-    <p style="font-size:0.72rem;line-height:1.6;color:rgba(255,255,255,0.38);font-style:italic;text-align:center;">
-      <span class="t-es">Puede que tengas que hacer un click cualquiera para que se reproduzca los sonidos correctamente.</span>
-      <span class="t-en">You may need to click anywhere for the sounds to play correctly.</span>
-      <span class="t-ja">音声を正しく再生するには、どこかをクリックする必要があるかもしれません。</span>
-    </p>
-  </div>
 </div>
 
 
@@ -1531,79 +2426,187 @@ nav {
   <!-- NOVELAS -->
   <section id="novelas">
 
-    <!-- ══ AVISOS movidos al sidebar ══ -->
-
-    <!-- ══ ORDEN DE LECTURA ══ -->
-    <div id="orden-lectura-wrapper">
+    <!-- ══ ORDEN DE LECTURA + VOLVER — absolute dentro de #novelas ══ -->
+    <div id="orden-lectura-wrapper" style="display:none;">
       <button id="orden-lectura-btn" onclick="toggleOrdenLectura()" class="hov-sfx">
         <span class="t-es">Orden de lectura</span>
         <span class="t-en">Reading order</span>
         <span class="t-ja">読む順番</span>
       </button>
       <div id="orden-lectura-panel">
-
-        <!-- ES -->
         <div class="t-es">
           <p>No hay un orden; pero si eres indeciso, puedes elegir entre estos:</p>
-          <div class="orden-item">
-            <span class="orden-label">Si eres paciente para leer historias largas:</span>
-            Rojo, blanco, azul, naranja, morado, verde y gris. <em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">(Orden en que fueron escritas)</em>
-          </div>
-          <div class="orden-item">
-            <span class="orden-label">Si prefieres algo más rápido:</span>
-            Azul, morado, naranja, verde, blanco, rojo, gris.
-          </div>
-          <div class="orden-item">
-            <span class="orden-label">Si empiezas por lo gratis:</span>
-            Morado, naranja, blanco, verde, gris, azul, rojo.
-          </div>
+          <div class="orden-item"><span class="orden-label">Si eres paciente para leer historias largas:</span> Rojo, blanco, azul, naranja, morado, verde y gris. <em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">(Orden en que fueron escritas)</em></div>
+          <div class="orden-item"><span class="orden-label">Si prefieres algo más rápido:</span> Azul, morado, naranja, verde, blanco, rojo, gris.</div>
+          <div class="orden-item"><span class="orden-label">Si empiezas por lo gratis:</span> Morado, naranja, blanco, verde, gris, azul, rojo.</div>
         </div>
-
-        <!-- EN -->
         <div class="t-en">
           <p>There is no set order; but if you're undecided, you can choose from these:</p>
-          <div class="orden-item">
-            <span class="orden-label">If you're patient for long stories:</span>
-            Red, white, blue, orange, purple, green and grey. <em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">(Order they were written)</em>
-          </div>
-          <div class="orden-item">
-            <span class="orden-label">If you prefer something shorter:</span>
-            Blue, purple, orange, green, white, red, grey.
-          </div>
-          <div class="orden-item">
-            <span class="orden-label">If you start with the free ones:</span>
-            Purple, orange, white, green, grey, blue, red.
-          </div>
+          <div class="orden-item"><span class="orden-label">If you're patient for long stories:</span> Red, white, blue, orange, purple, green and grey. <em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">(Order they were written)</em></div>
+          <div class="orden-item"><span class="orden-label">If you prefer something shorter:</span> Blue, purple, orange, green, white, red, grey.</div>
+          <div class="orden-item"><span class="orden-label">If you start with the free ones:</span> Purple, orange, white, green, grey, blue, red.</div>
         </div>
-
-        <!-- JA -->
         <div class="t-ja">
           <p>順番は決まっていませんが、迷っている方はこちらを参考にどうぞ：</p>
-          <div class="orden-item">
-            <span class="orden-label">長い話をじっくり読みたい方：</span>
-            赤、白、青、橙、紫、緑、灰。<em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">（執筆順）</em>
-          </div>
-          <div class="orden-item">
-            <span class="orden-label">短めのものから始めたい方：</span>
-            青、紫、橙、緑、白、赤、灰。
-          </div>
-          <div class="orden-item">
-            <span class="orden-label">無料作品から始めたい方：</span>
-            紫、橙、白、緑、灰、青、赤。
-          </div>
+          <div class="orden-item"><span class="orden-label">長い話をじっくり読みたい方：</span> 赤、白、青、橙、紫、緑、灰。<em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">（執筆順）</em></div>
+          <div class="orden-item"><span class="orden-label">短めのものから始めたい方：</span> 青、紫、橙、緑、白、赤、灰。</div>
+          <div class="orden-item"><span class="orden-label">無料作品から始めたい方：</span> 紫、橙、白、緑、灰、青、赤。</div>
         </div>
-
       </div>
+      <button id="btn-volver-series" onclick="ocultarRombos()">
+        <span class="t-es">← Volver atrás</span>
+        <span class="t-en">← Go back</span>
+        <span class="t-ja">← 戻る</span>
+      </button>
     </div>
 
-    <div class="grid-wrapper">
+    <!-- ══ AVISOS movidos al sidebar ══ -->
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PANTALLA DE PORTADAS DE SERIES
+         Estado inicial: visible. Se oculta al hacer clic en una portada.
+
+         PARA AÑADIR MÁS SERIES EN EL FUTURO:
+         Duplica el bloque <div class="serie-cover-item"> dentro de
+         #series-cover-screen y ajusta imagen, audio y label.
+         El flexbox los colocará automáticamente uno al lado del otro.
+    ══════════════════════════════════════════════════════════════ -->
+    <div id="series-cover-screen">
+
+      <!-- ── TÍTULO DEL CATÁLOGO ── -->
+      <div id="catalog-title">
+        <span class="t-es">Novelas actuales</span>
+        <span class="t-en">Current novels</span>
+        <span class="t-ja">現在の小説</span>
+      </div>
+
+      <!-- ── CARRUSEL FOCO ── -->
+      <div id="catalog-covers-row">
+
+        <div id="focus-stage">
+
+          <!-- Indicadores (dots) -->
+          <div id="carousel-dots">
+            <button class="cdot active" onclick="carouselGoTo(0)" aria-label="Tarjeta 1"></button>
+            <button class="cdot"       onclick="carouselGoTo(1)" aria-label="Tarjeta 2"></button>
+          </div>
+
+          <button class="carousel-arrow hidden" id="carousel-prev" onclick="carouselNav(-1)" aria-label="Anterior">
+            <svg viewBox="0 0 18 36" xmlns="http://www.w3.org/2000/svg"><polyline points="14,4 4,18 14,32"/></svg>
+          </button>
+          <button class="carousel-arrow" id="carousel-next" onclick="carouselNav(1)" aria-label="Siguiente">
+            <svg viewBox="0 0 18 36" xmlns="http://www.w3.org/2000/svg"><polyline points="4,4 14,18 4,32"/></svg>
+          </button>
+
+          <!-- ── TARJETA 0: Colección ¿Es correcto...? ── -->
+          <div class="focus-card" id="fcard-0" data-index="0">
+            <div class="serie-cover-item"
+                 id="serie-es-correcto"
+                 onmouseleave="stopVoz('serie-es-correcto-hover')">
+
+              <div class="cover-hit-area" onclick="mostrarRombos()">
+                <img id="img-serie-es-correcto"
+                     src="portada_es_correcto.jpg"
+                     alt="Colección ¿Es correcto...?"
+                     draggable="false"
+                     onmouseenter="playVoz('serie-es-correcto-hover')"
+                     onmouseleave="stopVoz('serie-es-correcto-hover')">
+
+                <div class="serie-cover-meta"
+                     onmouseenter="hideTip()"
+                     onmousemove="event.stopPropagation()">
+                  <span class="serie-cover-meta-pages">
+                    <span class="t-es">376 páginas</span>
+                    <span class="t-en">376 pages</span>
+                    <span class="t-ja">376ページ</span>
+                  </span>
+                  <span class="serie-cover-meta-genres">
+                    <span class="t-es">Fantasía · Misterio · Tragedia</span>
+                    <span class="t-en">Fantasy · Mystery · Tragedy</span>
+                    <span class="t-ja">ファンタジー · ミステリー · 悲劇</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="card-btns"
+                   onclick="event.stopPropagation()">
+                <button class="btn-trailer"
+                        onmouseenter="hideTip()"
+                        onmousemove="event.stopPropagation()"
+                        onmouseleave="hideTip()"
+                        onclick="event.stopPropagation(); abrirTrailer();">
+                  <span class="t-es">Ver Tráiler</span>
+                  <span class="t-en">Watch Trailer</span>
+                  <span class="t-ja">トレーラーを見る</span>
+                </button>
+
+                <div class="cover-shop-btns"
+                     onmouseenter="hideTip()"
+                     onmousemove="event.stopPropagation()"
+                     onmouseleave="hideTip()">
+                  <a href="https://ko-fi.com/s/24444ef5c1" target="_blank"
+                     class="cover-shop-btn hov-sfx"
+                     onclick="event.stopPropagation()">
+                    <span class="t-es">Obtener</span>
+                    <span class="t-en">Get</span>
+                    <span class="t-ja">入手</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /fcard-0 -->
+
+          <!-- ── TARJETA 1: Próximamente ── -->
+          <div class="focus-card" id="fcard-1" data-index="1">
+            <div class="serie-placeholder">
+              <div class="serie-placeholder-card">
+                <svg class="serie-placeholder-icon" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="8" y="4" width="28" height="36" rx="2" stroke="white" stroke-width="1.5" fill="none"/>
+                  <rect x="14" y="4" width="2" height="36" fill="white" opacity="0.15"/>
+                  <line x1="14" y1="14" x2="32" y2="14" stroke="white" stroke-width="1" opacity="0.4"/>
+                  <line x1="14" y1="20" x2="32" y2="20" stroke="white" stroke-width="1" opacity="0.4"/>
+                  <line x1="14" y1="26" x2="26" y2="26" stroke="white" stroke-width="1" opacity="0.4"/>
+                  <path d="M8 40 Q8 44 12 44 H36 Q40 44 40 40 V12" stroke="white" stroke-width="1.5" fill="none" opacity="0.3"/>
+                </svg>
+                <span class="serie-placeholder-text">
+                  <span class="t-es">Próximamente</span>
+                  <span class="t-en">Coming soon</span>
+                  <span class="t-ja">近日公開</span>
+                </span>
+              </div>
+            </div>
+          </div><!-- /fcard-1 -->
+
+        </div><!-- /focus-stage -->
+
+      </div><!-- /catalog-covers-row -->
+
+    </div><!-- /series-cover-screen -->
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         GRID DE ROMBOS
+         Estado inicial: oculto. Se muestra al hacer clic en una portada.
+         El botón "Volver a las series" devuelve al estado inicial.
+    ══════════════════════════════════════════════════════════════ -->
+    <div class="grid-wrapper" id="rombos-wrapper" style="display:none; position:relative;">
+
+      <!--
+        GRID DE ROMBOS (sin cambios respecto al original).
+        buildDiamonds() inyecta aquí los rombos al cargar la página.
+        Los eventos de audio (hover/clic) de cada rombo funcionan igual.
+      -->
       <div class="grid-container" id="gridContainer">
         <div class="logo-central hov-sfx" id="centerLogo"
              style="grid-column:2;grid-row:2">
           <img src="tu_logo.png" alt="Logo ¿Es correcto...?" draggable="false" style="max-width: 100%; height: auto; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;">
         </div>
       </div>
-    </div>
+
+    </div><!-- /rombos-wrapper -->
+
   </section>
 
   <!-- EXTRAS -->
@@ -1707,100 +2710,112 @@ nav {
         <!-- Texto -->
         <div style="flex:1; min-width: 260px;">
 
-          <!-- Sección personal -->
-          <div>
-            <p class="sobre-block-label t-es">Personal</p>
-            <p class="sobre-block-label t-en">Personal</p>
-            <p class="sobre-block-label t-ja">個人</p>
-            <ul class="sobre-list t-es">
-              <li>Nací el 1 de diciembre de 1996 y soy 0 positivo <span class="sobre-aside">(lo anoto porque siempre me olvido)</span>.</li>
-              <li>Nunca he fumado ni bebido alcohol; además, si fuera a ser mi pareja, rechazo a quienes consumen.</li>
-              <li>Como nadie me suele apoyar, me tomo mi tiempo en todo.</li>
-              <li>Tengo un sueño que nunca pude cumplir.</li>
-              <li>No suelo contestar a nada a menos que pregunten algo importante o me digan de primeras el motivo por el que me hablan.</li>
-              <li>Soy asocial, no suelo iniciar conversación.</li>
-              <li>No me gusta viajar, ni el pescado en general, ni su olor.</li>
-              <li>No me suelen gustar las canciones que mezclan idiomas.</li>
-              <li>Me gustan los videojuegos, aunque cada vez los consumo menos; soy poco competitivo, tanto que no he participado en torneos.</li>
-              <li>No colecciono nada, ni suelo gastar el dinero <span class="sobre-aside">(porque soy pobre)</span>.</li>
-              <li>Me cansa y soy perezoso para hablar verbalmente.</li>
-              <li>Soy esclavo de los gatos.</li>
-              <li>El único programa de edición de imágenes que me gusta es el Gimp.</li>
-              <li>Evito los juegos o libros sin demo por dudar del contenido.</li>
-            </ul>
-            <ul class="sobre-list t-en">
-              <li>I was born on December 1st, 1996, and my blood type is O positive <span class="sobre-aside">(I write it down because I always forget)</span>.</li>
-              <li>I have never smoked or drunk alcohol; and if someone were to be my partner, I would turn down those who do.</li>
-              <li>Since almost no one tends to support me, I take my time with everything.</li>
-              <li>I have a dream I was never able to fulfill.</li>
-              <li>I rarely reply to anything unless someone asks something important or tells me upfront why they are reaching out.</li>
-              <li>I am asocial and rarely initiate conversation.</li>
-              <li>I dislike travelling, fish in general, and its smell.</li>
-              <li>I generally dislike songs that mix languages.</li>
-              <li>I enjoy video games, though I play them less and less; I am not very competitive — I have never taken part in tournaments.</li>
-              <li>I do not collect anything, nor do I tend to spend money <span class="sobre-aside">(because I am poor)</span>.</li>
-              <li>Talking verbally tires me out and I am lazy about it.</li>
-              <li>I am a slave to cats.</li>
-              <li>The only image editing program I like is Gimp.</li>
-              <li>I avoid games or books without a demo because I doubt the content.</li>
-            </ul>
-            <ul class="sobre-list t-ja">
-              <li>1996年12月1日生まれで、血液型はO型陽性です <span class="sobre-aside">（いつも忘れるので書き留めています）</span>。</li>
-              <li>タバコも飲酒もしたことがありません。もしパートナーになるなら、それらを嗜む人はお断りします。</li>
-              <li>応援してくれる人がほとんどいないので、何事もマイペースに取り組んでいます。</li>
-              <li>叶えられなかった夢があります。</li>
-              <li>重要な質問か、最初から話しかける理由を伝えてもらわない限り、基本的に返信しません。</li>
-              <li>非社交的で、自分から会話を始めることはほとんどありません。</li>
-              <li>旅行も、魚全般も、その匂いも好きではありません。</li>
-              <li>複数の言語が混ざった曲はあまり好きではありません。</li>
-              <li>ゲームは好きですが、最近はあまりプレイしなくなりました。競争心が薄く、大会に参加したことはありません。</li>
-              <li>何も集めておらず、お金もあまり使いません <span class="sobre-aside">（貧しいので）</span>。</li>
-              <li>口頭で話すのは疲れるし、面倒に感じます。</li>
-              <li>猫の奴隷です。</li>
-              <li>好きな画像編集ソフトはGimpだけです。</li>
-              <li>内容に疑問を感じるので、体験版のないゲームや本は避けています。</li>
-            </ul>
+          <!-- ══ ACORDEÓN: PERSONAL ══ -->
+          <button class="sobre-accordion-btn hov-sfx" onclick="toggleSobreAccordion(this)" aria-expanded="false">
+            <span>
+              <span class="t-es">Personal</span>
+              <span class="t-en">Personal</span>
+              <span class="t-ja">個人</span>
+            </span>
+            <span class="sobre-accordion-arrow">▼</span>
+          </button>
+          <div class="sobre-accordion-panel" role="region">
+            <div class="sobre-accordion-inner">
+              <ul class="sobre-list t-es">
+                <li>Nací el 1 de diciembre de 1996 y soy 0 positivo <span class="sobre-aside">(lo anoto porque siempre me olvido)</span>.</li>
+                <li>Nunca he fumado ni bebido alcohol; además, si fuera a ser mi pareja, rechazo a quienes consumen.</li>
+                <li>Como nadie me suele apoyar, me tomo mi tiempo en todo.</li>
+                <li>Tengo un sueño que nunca pude cumplir.</li>
+                <li>No suelo contestar a nada a menos que pregunten algo importante o me digan de primeras el motivo por el que me hablan.</li>
+                <li>Soy asocial, no suelo iniciar conversación.</li>
+                <li>No me gusta viajar, ni el pescado en general, ni su olor.</li>
+                <li>No me suelen gustar las canciones que mezclan idiomas.</li>
+                <li>Me gustan los videojuegos, aunque cada vez los consumo menos; soy poco competitivo, tanto que no he participado en torneos.</li>
+                <li>No colecciono nada, ni suelo gastar el dinero <span class="sobre-aside">(porque soy pobre)</span>.</li>
+                <li>Me cansa y soy perezoso para hablar verbalmente.</li>
+                <li>Soy esclavo de los gatos.</li>
+                <li>El único programa de edición de imágenes que me gusta es el Gimp.</li>
+                <li>Evito los juegos o libros sin demo por dudar del contenido.</li>
+              </ul>
+              <ul class="sobre-list t-en">
+                <li>I was born on December 1st, 1996, and my blood type is O positive <span class="sobre-aside">(I write it down because I always forget)</span>.</li>
+                <li>I have never smoked or drunk alcohol; and if someone were to be my partner, I would turn down those who do.</li>
+                <li>Since almost no one tends to support me, I take my time with everything.</li>
+                <li>I have a dream I was never able to fulfill.</li>
+                <li>I rarely reply to anything unless someone asks something important or tells me upfront why they are reaching out.</li>
+                <li>I am asocial and rarely initiate conversation.</li>
+                <li>I dislike travelling, fish in general, and its smell.</li>
+                <li>I generally dislike songs that mix languages.</li>
+                <li>I enjoy video games, though I play them less and less; I am not very competitive — I have never taken part in tournaments.</li>
+                <li>I do not collect anything, nor do I tend to spend money <span class="sobre-aside">(because I am poor)</span>.</li>
+                <li>Talking verbally tires me out and I am lazy about it.</li>
+                <li>I am a slave to cats.</li>
+                <li>The only image editing program I like is Gimp.</li>
+                <li>I avoid games or books without a demo because I doubt the content.</li>
+              </ul>
+              <ul class="sobre-list t-ja">
+                <li>1996年12月1日生まれで、血液型はO型陽性です <span class="sobre-aside">（いつも忘れるので書き留めています）</span>。</li>
+                <li>タバコも飲酒もしたことがありません。もしパートナーになるなら、それらを嗜む人はお断りします。</li>
+                <li>応援してくれる人がほとんどいないので、何事もマイペースに取り組んでいます。</li>
+                <li>叶えられなかった夢があります。</li>
+                <li>重要な質問か、最初から話しかける理由を伝えてもらわない限り、基本的に返信しません。</li>
+                <li>非社交的で、自分から会話を始めることはほとんどありません。</li>
+                <li>旅行も、魚全般も、その匂いも好きではありません。</li>
+                <li>複数の言語が混ざった曲はあまり好きではありません。</li>
+                <li>ゲームは好きですが、最近はあまりプレイしなくなりました。競争心が薄く、大会に参加したことはありません。</li>
+                <li>何も集めておらず、お金もあまり使いません <span class="sobre-aside">（貧しいので）</span>。</li>
+                <li>口頭で話すのは疲れるし、面倒に感じます。</li>
+                <li>猫の奴隷です。</li>
+                <li>好きな画像編集ソフトはGimpだけです。</li>
+                <li>内容に疑問を感じるので、体験版のないゲームや本は避けています。</li>
+              </ul>
+            </div>
           </div>
 
-          <!-- Divisor -->
-          <div class="sobre-divider">
-            <span class="t-es">↓ Cosas sobre la novela ↓</span>
-            <span class="t-en">↓ About the novel ↓</span>
-            <span class="t-ja">↓ 小説について ↓</span>
-          </div>
+          <div class="sobre-accordion-gap"></div>
 
-          <!-- Sección novela -->
-          <div>
-            <ul class="sobre-list t-es">
-              <li>Empecé la novela en octubre de 2018 y la publiqué como una trilogía el último día de 2023.</li>
-              <li>Desde 2021 que la publiqué en Amazon, hasta inicios de 2026, la novela generó en 5 años 15€.</li>
-              <li>La historia, la escritura (en español) y los diseños de los personajes no son IA.</li>
-              <li>Incluso si la novela ganara algún premio, nunca lo presumiría en su sinopsis o portada. Ni siquiera tengo intención de participar en algún torneo porque los gustos son subjetivos.</li>
-              <li>No tengo planeado adaptar la historia a otro medio; aunque sí pensé en una novela visual, lo cancelé por todo el trabajo que conlleva hacerlo solo. Si lo adaptase a otro medio, sería una vez que haya finalizado la historia al 100%.</li>
-              <li>No admiro a los ilustradores que dibujan por tendencia para ganar popularidad y, sin permiso, los venden como si fueran de su propiedad (aunque yo lo permito). O quienes aprovechan la muerte de un autor popular con la excusa de conmemorarlo.</li>
-              <li>Atesoro lo que me regalan, como dibujos antiguos (o actuales, incluso si son hechos con IA) que a día de hoy conservo.</li>
-              <li>Si siento necesario hacer cambios a la historia, no dudaré en actualizarlo.</li>
-            </ul>
-            <ul class="sobre-list t-en">
-              <li>I started the novel in October 2018 and published it as a trilogy on the last day of 2023.</li>
-              <li>From 2021, when I published it on Amazon, until early 2026, the novel earned €15 over 5 years.</li>
-              <li>The story, the writing (in Spanish) and the character designs are not AI-generated.</li>
-              <li>Even if the novel were to win some award, I would never boast about it in its synopsis or cover. I do not even intend to enter any competition, because taste is subjective.</li>
-              <li>I have no plans to adapt the story to another medium; although I did consider a visual novel, I cancelled it due to all the work it would involve doing alone. If I were to adapt it to another medium, it would be once the story is 100% finished.</li>
-              <li>I do not admire illustrators who draw trending content just to gain popularity and then sell it as if it were their own property without permission (even though I allow it). Or those who exploit the death of a popular author under the guise of commemorating them.</li>
-              <li>I treasure gifts I receive, such as old drawings (or recent ones, even if made with AI) that I still keep to this day.</li>
-              <li>If I feel changes to the story are necessary, I will not hesitate to update it.</li>
-            </ul>
-            <ul class="sobre-list t-ja">
-              <li>2018年10月に小説を書き始め、2023年の最終日に三部作として出版しました。</li>
-              <li>2021年にAmazonで出版してから2026年初頭までの5年間で、小説の収益は15ユーロでした。</li>
-              <li>ストーリー、文章（スペイン語）、キャラデザインはAI生成ではありません。</li>
-              <li>たとえ小説が何らかの賞を受賞しても、あらすじや表紙に載せて自慢するつもりはありません。趣味は主観的なものなので、コンテストに参加するつもりもありません。</li>
-              <li>ストーリーを別のメディアに展開する予定はありません。ビジュアルノベルも考えましたが、一人でこなす作業量を考えて断念しました。もし別の媒体に適応させるとしたら、それはストーリーが 100% 完成してからになるでしょう。</li>
-              <li>人気を得るためにトレンドに乗ったイラストを描き、許可なく自分の「所有物」として販売するイラストレーターは尊敬しません（私自身は許可していますが）。また、人気作家の死を追悼という名目で利用する人も同様です。</li>
-              <li>頂いたものはすべて大切にしています。古い絵（または最近のもの、AIで描かれたものでも）を今でも保管しています。</li>
-              <li>ストーリーに変更が必要だと感じたら、迷わず更新します。</li>
-            </ul>
+          <!-- ══ ACORDEÓN: COSAS SOBRE LA NOVELA ══ -->
+          <button class="sobre-accordion-btn hov-sfx open" onclick="toggleSobreAccordion(this)" aria-expanded="true">
+            <span>
+              <span class="t-es">Cosas sobre la novela</span>
+              <span class="t-en">About the novel</span>
+              <span class="t-ja">小説について</span>
+            </span>
+            <span class="sobre-accordion-arrow">▼</span>
+          </button>
+          <div class="sobre-accordion-panel open" role="region">
+            <div class="sobre-accordion-inner">
+              <ul class="sobre-list t-es">
+                <li>Empecé la novela en octubre de 2018 y la publiqué como una trilogía el último día de 2023.</li>
+                <li>Desde 2021 que la publiqué en Amazon, hasta inicios de 2026, la novela generó en 5 años 15€.</li>
+                <li>La historia, la escritura (en español) y los diseños de los personajes no son IA.</li>
+                <li>Incluso si la novela ganara algún premio, nunca lo presumiría en su sinopsis o portada. Ni siquiera tengo intención de participar en algún torneo porque los gustos son subjetivos.</li>
+                <li>No tengo planeado adaptar la historia a otro medio; aunque sí pensé en una novela visual, lo cancelé por todo el trabajo que conlleva hacerlo solo. Si lo adaptase a otro medio, sería una vez que haya finalizado la historia al 100%.</li>
+                <li>No admiro a los ilustradores que dibujan por tendencia para ganar popularidad y, sin permiso, los venden como si fueran de su propiedad (aunque yo lo permito). O quienes aprovechan la muerte de un autor popular con la excusa de conmemorarlo.</li>
+                <li>Atesoro lo que me regalan, como dibujos antiguos (o actuales, incluso si son hechos con IA) que a día de hoy conservo.</li>
+                <li>Si siento necesario hacer cambios a la historia, no dudaré en actualizarlo.</li>
+              </ul>
+              <ul class="sobre-list t-en">
+                <li>I started the novel in October 2018 and published it as a trilogy on the last day of 2023.</li>
+                <li>From 2021, when I published it on Amazon, until early 2026, the novel earned €15 over 5 years.</li>
+                <li>The story, the writing (in Spanish) and the character designs are not AI-generated.</li>
+                <li>Even if the novel were to win some award, I would never boast about it in its synopsis or cover. I do not even intend to enter any competition, because taste is subjective.</li>
+                <li>I have no plans to adapt the story to another medium; although I did consider a visual novel, I cancelled it due to all the work it would involve doing alone. If I were to adapt it to another medium, it would be once the story is 100% finished.</li>
+                <li>I do not admire illustrators who draw trending content just to gain popularity and then sell it as if it were their own property without permission (even though I allow it). Or those who exploit the death of a popular author under the guise of commemorating them.</li>
+                <li>I treasure gifts I receive, such as old drawings (or recent ones, even if made with AI) that I still keep to this day.</li>
+                <li>If I feel changes to the story are necessary, I will not hesitate to update it.</li>
+              </ul>
+              <ul class="sobre-list t-ja">
+                <li>2018年10月に小説を書き始め、2023年の最終日に三部作として出版しました。</li>
+                <li>2021年にAmazonで出版してから2026年初頭までの5年間で、小説の収益は15ユーロでした。</li>
+                <li>ストーリー、文章（スペイン語）、キャラデザインはAI生成ではありません。</li>
+                <li>たとえ小説が何らかの賞を受賞しても、あらすじや表紙に載せて自慢するつもりはありません。趣味は主観的なものなので、コンテストに参加するつもりもありません。</li>
+                <li>ストーリーを別のメディアに展開する予定はありません。ビジュアルノベルも考えましたが、一人でこなす作業量を考えて断念しました。もし別の媒体に適応させるとしたら、それはストーリーが 100% 完成してからになるでしょう。</li>
+                <li>人気を得るためにトレンドに乗ったイラストを描き、許可なく自分の「所有物」として販売するイラストレーターは尊敬しません（私自身は許可していますが）。また、人気作家の死を追悼という名目で利用する人も同様です。</li>
+                <li>頂いたものはすべて大切にしています。古い絵（または最近のもの、AIで描かれたものでも）を今でも保管しています。</li>
+                <li>ストーリーに変更が必要だと感じたら、迷わず更新します。</li>
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -1832,7 +2847,8 @@ nav {
     <div id="modal-info-view">
       <div class="modal-left">
         <h2 class="modal-title"   id="m-title"></h2>
-        <p  class="modal-slogan"  id="m-slogan"></p>
+        <p class="modal-slogan" id="m-slogan" onclick="toggleModalVoz()" style="cursor:pointer;" title=""></p>
+        <button id="m-slogan-play" style="display:none" aria-hidden="true"></button>
         <div class="modal-meta">
           <span class="modal-badge" id="m-badge"></span>
           <span id="m-pages"></span>
@@ -1880,6 +2896,11 @@ nav {
 <div id="logo-modal-overlay" onclick="logoOverlayClick(event)" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;">
   <div style="background:#111;border:1px solid rgba(255,255,255,0.15);padding:2.5rem 3rem;max-width:560px;width:90%;max-height:80vh;overflow-y:auto;position:relative;text-align:center;">
     <span class="modal-close hov-sfx" onclick="closeLogoModal()" style="position:absolute;top:0.75rem;right:1rem;font-size:1.4rem;cursor:pointer;color:rgba(255,255,255,0.5);">✕</span>
+    <button id="logo-modal-play-btn" class="collab-modal-btn hov-sfx" onclick="toggleLogoAudio()" style="flex:none;display:inline-flex;margin:0 auto 1.2rem;border:1px solid rgba(255,255,255,0.15);border-radius:2px;padding:0.5rem 1.2rem;">
+      <span class="t-es">▶ Reproducir</span>
+      <span class="t-en">▶ Play</span>
+      <span class="t-ja">▶ 再生</span>
+    </button>
     <h2 id="logo-modal-title" style="text-decoration:underline;text-underline-offset:5px;margin-bottom:1.5rem;font-size:1.4rem;"></h2>
     <p  id="logo-modal-lyrics" style="font-size:0.85rem;line-height:2;color:rgba(255,255,255,0.85);white-space:pre-line;"></p>
   </div>
@@ -2909,7 +3930,7 @@ Without a doubt, I stretched my hand toward the light, with longing, offering my
   {
     gridClass: 'gc-3-1', outline: 'gray', vozId: 'voz-6',
     cover: 'portada_sueño.jpg',
-    title:  { es:'¿Es correcto el soñar?', en:'Is it right to dream?', ja:'夢を見るのは正しいか？' },
+    title:  { es:'¿Es correcto soñar?', en:'Is it right to dream?', ja:'夢を見るのは正しいか？' },
     slogan: { es:'Levantándome con determinación, empecé a soñar.', en:'Rising with determination, I began to dream.', ja:'決意を胸に立ち上がり、夢を見始めた。' },
     free:   { es:'PAGO', en:'PAID', ja:'有料' },
     pages:  { es:'2 PÁGINAS', en:'2 PAGES', ja:'2ページ' },
@@ -3501,17 +4522,18 @@ I remembered the pending questions:
     link: { es:'https://amazon.com/', en:'https://amazon.com/', ja:'https://amazon.co.jp/' }
   },
   {
-    gridClass: 'gc-1-1', outline: 'rainbow', vozId: 'voz-8',
-    cover: 'pregunta.jpg',
-    title:  { es:'Próximamente.', en:'Coming Soon.', ja:'近日公開。' },
-    slogan: { es:'Próximamente.', en:'Coming Soon.', ja:'近日公開。' },
-    free:   { es:'???', en:'???', ja:'???' },
-    pages:  { es:'???', en:'???', ja:'???' },
-    genres: { es:'???', en:'???', ja:'???' },
-    synopsis:{ es:'Contenido secreto.', en:'Secret content.', ja:'秘密の内容。' },
+    gridClass: 'gc-1-1', outline: 'rainbow', vozId: 'voz-13',
+    cover: 'portada_ser.jpg',
+    title:  { es:'¿Es correcto ser?', en:'Is it right to be?', ja:'存在するのは正しいか？' },
+    slogan: { es:'Luchando, intenté ser.', en:'Fighting, I tried to be.', ja:'戦いながら、在ろうとした。' },
+    free:   { es:'De pago', en:'Paid', ja:'有料' },
+    pages:  { es:'12 páginas', en:'12 pages', ja:'12ページ' },
+    genres: { es:'Misterio, tragedia y fantasía.', en:'Mystery, tragedy and fantasy.', ja:'ミステリー、悲劇、ファンタジー。' },
+    synopsis:{ es:'Novela final de la serie, la cual debe leerse después de las demás.', en:'Final novel of the series, which should be read after the others.', ja:'シリーズ最終作。他の作品を読んでから読むべき作品です。' },
     sample: { es: '', en: '', ja: '' },
-    youtube: '',
-    actor: { nombre: 'Cambiar', url: '#', color: 'rgba(255,255,255,0.92)' },
+    youtube: { es:'https://www.youtube.com/embed/2psfTPF9O1w', en:'https://www.youtube.com/embed/T4qAMnHMvSA', ja:'https://www.youtube.com/embed/LbXkHNl4jJY' },
+    actor: { nombre: { es: 'Itachi', en: 'Itachi', ja: 'いたち' }, url: 'https://lit.link/takizaweb', color: 'rgba(255,255,255,0.92)' },
+    compositor: { nombre: { es:'Nanashi no gothic', en:'Nanashi no gothic', ja:'ナナシのゴシック!' }, url: 'https://x.com/nanashigothic', color: 'rgba(255,255,255,0.92)' },
     link: { es:'#', en:'#', ja:'#' }
   }
 ];
@@ -3548,8 +4570,11 @@ function setLang(lang) {
   // Update Amazon link
   const amazonBtn = document.getElementById('amazon-btn');
   if (amazonBtn) amazonBtn.href = AMAZON_LINKS[lang] || AMAZON_LINKS.es;
+  const coverAmazonBtn = document.getElementById('cover-amazon-btn');
+  if (coverAmazonBtn) coverAmazonBtn.href = AMAZON_LINKS[lang] || AMAZON_LINKS.es;
 
   applyLang(lang);
+  updateSerieCoverImages(lang);
 }
 
 function applyLang(lang) {
@@ -3564,6 +4589,91 @@ function applyLang(lang) {
   document.querySelectorAll('[data-ip]').forEach(el => {
     try { el.textContent = JSON.parse(el.dataset.ip)[lang] || ''; } catch(e){}
   });
+}
+
+/* ══════════════════════════════════════
+   SERIES COVER SCREEN — NAVEGACIÓN
+   ══════════════════════════════════════
+
+   mostrarRombos():   oculta la pantalla de portadas y muestra el grid de rombos.
+   ocultarRombos():   oculta el grid y vuelve a la pantalla de portadas.
+   mostrarTipSerie(): muestra el cursor-tip con el lema de la colección al hacer hover.
+
+   Si en el futuro tienes varias series, puedes pasar el lema como argumento
+   o leer un data-atributo del elemento para que cada serie muestre el suyo.
+*/
+function mostrarRombos() {
+  stopVoz('serie-es-correcto-hover');
+  hideTip();
+  playHoverSfx();
+
+  const screen  = document.getElementById('series-cover-screen');
+  const rombos  = document.getElementById('rombos-wrapper');
+  const wrapper = document.getElementById('orden-lectura-wrapper');
+
+  screen.style.display  = 'none';
+  rombos.style.display  = '';
+  if (wrapper) wrapper.style.display = '';
+  rombos.classList.add('entrando');
+  setTimeout(() => rombos.classList.remove('entrando'), 400);
+  applyLang(currentLang);
+}
+
+function ocultarRombos() {
+  const screen  = document.getElementById('series-cover-screen');
+  const rombos  = document.getElementById('rombos-wrapper');
+  const wrapper = document.getElementById('orden-lectura-wrapper');
+
+  rombos.style.display  = 'none';
+  if (wrapper) wrapper.style.display = 'none';
+  screen.style.display  = '';
+  screen.style.animation = 'none';
+  void screen.offsetWidth;
+  screen.style.animation = '';
+  screen.style.animationName = 'catalogFadeIn';
+  screen.style.animationDuration = '0.35s';
+
+  applyLang(currentLang);
+}
+
+/*
+  Muestra el lema general de la colección en el cursor-tip.
+  PERSONALIZA el lema aquí o cámbialo por una variable si lo tienes en JS.
+*/
+const SERIE_LEMA = {
+  es: 'Luchando, intenté ser.',
+  en: 'Fighting, I tried to be.',
+  ja: '戦いながら、在ろうとした。'
+};
+function mostrarTipSerie(e) {
+  showTip(e, SERIE_LEMA[currentLang] || SERIE_LEMA.es);
+}
+
+/*
+  Cambia la imagen de portada de cada serie según el idioma activo.
+  Idiomas: es → portada_es_correcto.jpg
+           en → portada_en_correcto.jpg
+           ja → portada_jp_correcto.jpg
+  Si en el futuro añades más series, amplía este objeto con sus IDs e imágenes.
+*/
+const SERIE_COVER_IMAGES = {
+  'img-serie-es-correcto': {
+    es: 'portada_es_correcto.jpg',
+    en: 'portada_en_correcto.jpg',
+    ja: 'portada_jp_correcto.jpg'
+  }
+  /* Para una segunda serie, añade aquí:
+  'img-serie-nombre': {
+    es: 'portada_es_nombre.jpg',
+    en: 'portada_en_nombre.jpg',
+    ja: 'portada_jp_nombre.jpg'
+  } */
+};
+function updateSerieCoverImages(lang) {
+  for (const [imgId, srcs] of Object.entries(SERIE_COVER_IMAGES)) {
+    const el = document.getElementById(imgId);
+    if (el) el.src = srcs[lang] || srcs.es;
+  }
 }
 
 /* ══════════════════════ BUILD DIAMONDS ══════════════════════ */
@@ -3641,22 +4751,22 @@ const COLLAB_TIPS = {
       ja: 'いけどゆき様を選んだのはギリギリの判断で、最初は男性にそのキャラを演じてもらうことも考えていました。エリーの声を担当しました。彼女が音声と演技を素早く見事に仕上げてくれたことに驚きました。劇場でも活動しているようです。'
     },
     {
-      es: 'Nanairo Seika puso voz al gato. Su nombre, de nuevo casualmente, significa 7 colores, el mismo número de novelas que planeaba escribir. Fue bastante amable al tratar conmigo.',
-      en: 'Nanairo Seika voiced the cat. Her name, again coincidentally, means 7 colors — the same number of novels I planned to write. She was very kind in her dealings with me.',
-      ja: '七彩聖加様は猫を担当しました。彼女の名前は偶然にも「7色」を意味し、私が書こうとした小説の数と同じです。私に対してとても親切にしてくれました。'
+      es: 'Nanairo Seika puso voz al gato. Su nombre, de nuevo casualmente, significa 7 colores, el mismo número de novelas que planeaba escribir. Fue amable al tratar conmigo.\nSuele estar desaparecida en redes sociales, algo que me preocupa porque siempre se desconoce su paradero...',
+      en: 'Nanairo Seika voiced the cat. Her name, again coincidentally, means 7 colors — the same number of novels I planned to write. She was kind in her dealings with me.\nShe tends to disappear from social media, which worries me because her whereabouts are always unknown...',
+      ja: '七彩聖加様は猫を担当しました。彼女の名前は偶然にも「7色」を意味し、私が書こうとした小説の数と同じです。私に対して親切にしてくれました。\nSNSでよく姿を消してしまうことがあり、いつも居場所がわからなくなるので少し心配しています…'
     },
     {
-      es: 'Haro puso voz a la mujer de "¿Es correcto perder?". Siendo sincero y viendo sus actos, diría que es la japonesa más amable que he visto. No discrimina a las personas que utiliza IA, intenta apoyar, cuando es posible, a los demás y es empática. También la encontraréis jugando a juegos.',
-      en: 'Haro voiced the woman in "Is it right to lose?". Honestly, going by her actions, I would say she is the kindest Japanese person I have encountered. She does not discriminate against people who use AI, tries to support others when possible, and is empathetic. You will also find her playing games.',
-      ja: '86ハロは「負けるのは正しいか？」の女性を担当しました。彼女の行動を見ていると、私が出会った日本人の中で最も優しい方だと思います。AIを使う人を差別せず、できる限り他者を応援し、思いやりがあります。ゲームをプレイしているのも見かけます。'
+      es: 'Haro puso voz a la mujer de "¿Es correcto perder?". Ayuda a los demás y es empática. También la encontraréis jugando a juegos.',
+      en: 'Haro voiced the woman in "Is it right to lose?". She helps others and is empathetic. You will also find her playing games.',
+      ja: '86ハロは「負けるのは正しいか？」の女性を担当しました。他者を助け、思いやりがあります。ゲームをプレイしているのも見かけます。'
     },
     {
-      es: 'Hanamori hizo la voz del chico de "¿Es correcto ganar?". También fue uno de los más lentos en entregarme la voz. Cuando subí el tráiler, me sorprendió que me dijera que solo era una muestra, que lo iba a hacer mejor, cuando ya era perfecto el audio.',
-      en: 'Hanamori voiced the boy in "Is it right to win?". He was also one of the slowest to deliver. When I uploaded the trailer, he surprised me by saying it was just a sample and he would do better — even though the audio was already perfect.',
-      ja: '花護は「勝つのは正しいか？」の少年を担当しました。彼も音声の提出が最も遅かった一人です。トレーラーをアップロードしたとき、あれはサンプルで次はもっと良くすると言われたことに驚きました。すでに完璧な音声だったのに。'
+      es: 'Hanamori hizo la voz del chico de "¿Es correcto ganar?". También fue uno de los más lentos en entregarme la voz. Cuando subí el tráiler, me sorprendió que me dijera que solo era una muestra, que lo iba a hacer mejor, cuando ya era perfecto el audio.\nSiempre está ajetreado con su vida; es alguien que se esfuerza constantemente.',
+      en: 'Hanamori voiced the boy in "Is it right to win?". He was also one of the slowest to deliver. When I uploaded the trailer, he surprised me by saying it was just a sample and he would do better — even though the audio was already perfect.\nHe is always busy with his life; he is someone who constantly works hard.',
+      ja: '花護は「勝つのは正しいか？」の少年を担当しました。彼も音声の提出が最も遅かった一人です。トレーラーをアップロードしたとき、あれはサンプルで次はもっと良くすると言われたことに驚きました。すでに完璧な音声だったのに。\nいつも忙しくしていて、常に努力を続けている人です。'
     },
     {
-      es: 'Hotaru también fue la primera en aparecer en un tráiler, en el papel de Ramia y la diosa. Recuerdo que tuve problemas para mitigar el porrazo que el da al micrófono, pese a maltratar el micro, me gustó su trabajo.',
+      es: 'Hotaru también fue la primera en aparecer en un tráiler, en el papel de Ramia y la diosa. Recuerdo que tuve problemas para mitigar el porrazo que le da al micrófono, pese a maltratar el micro, me gustó su trabajo.',
       en: 'Hotaru was also the first to appear in a trailer, in the role of Ramia and the goddess. I remember having trouble understanding the way he hits the microphone, but despite roughing up the mic, I liked his performance.',
       ja: 'ほたる様は、ラーミア役と女神役で、トレーラーに初登場しました。マイクの打ち方が少し難しかったのを覚えていますが、マイクを乱暴に扱ったにもかかわらず、演技は気に入りました。'
     },
@@ -3666,21 +4776,26 @@ const COLLAB_TIPS = {
       ja: 'りるむ様もエイマ役でPVに初登場しましたね。初めて彼女の声を聞いた時は、カードゲームの声優さんを想像していました。さきち様、ほたる様、りるむ様は声優界の外の世界でしたが、今となっては初心者だとは誰も思わないと思います。'
     },
     {
-      es: 'Tooru puso voz a la protagonista de ¿Es correcto soñar?, es quien menos información le proporcioné. Su voz puede que sea más bonita de lo que preveí, pero no desentona con el personaje.',
-      en: 'Tooru voiced the protagonist of Is it right to dream?; she is the one I gave the least information to. Her voice may be prettier than I expected, but it does not clash with the character.',
-      ja: 'Tooruは「夢を見るのは正しいか？」の主人公の声を担当しました。私が最も情報を少なく伝えた方です。予想より声が綺麗かもしれませんが、キャラクターとも違和感なく合っています。'
+      es: 'Tooru puso voz a la protagonista de ¿Es correcto soñar?, es quien menos información le proporcioné. Su voz puede que sea más bonita de lo que preveí, pero no desentona con el personaje.\nA veces veo que deja comentarios a otros apoyándolos, algo que valoro como persona.',
+      en: 'Tooru voiced the protagonist of Is it right to dream?; she is the one I gave the least information to. Her voice may be prettier than I expected, but it does not clash with the character.\nI sometimes see her leaving supportive comments for others, something I value in her as a person.',
+      ja: 'Tooruは「夢を見るのは正しいか？」の主人公の声を担当しました。私が最も情報を少なく伝えた方です。予想より声が綺麗かもしれませんが、キャラクターとも違和感なく合っています。\n時々、他の人を応援するコメントを残しているのを見かけます。人として尊敬できる部分だと思います。'
     },
     {
-      es: 'Hakuhyo hizo la voz de Tei. Cuando escuché su parte, sentí que sonaba algo chūnibyō, pero tiene una voz grave interesante.',
-      en: 'Hakuhyo voiced Tei. When I heard his part, I felt it sounded a bit chūnibyō, but he has an interesting deep voice.',
-      ja: '薄氷でぽはテイの声を担当しました。パートを聞いたとき、少し中二病っぽいと感じましたが、面白い低い声を持っています。'
+      es: 'Hakuhyo hizo la voz de Tei. Cuando escuché su parte, sentí que sonaba algo chūnibyō, pero tiene una voz grave interesante.\nNunca veo oportunidad de conversar con él, pero siempre hace fotos agradables de objetos, lugares o animales.',
+      en: 'Hakuhyo voiced Tei. When I heard his part, I felt it sounded a bit chūnibyō, but he has an interesting deep voice.\nI never get the chance to talk with him, but he always takes lovely photos of objects, places, or animals.',
+      ja: '薄氷でぽはテイの声を担当しました。パートを聞いたとき、少し中二病っぽいと感じましたが、面白い低い声を持っています。\n彼と話す機会はあまりありませんが、いつも物や場所、動物の素敵な写真を撮っています。'
+    },
+    {
+      es: 'Itachi puso voz a Rasu, finiquitando el último tráiler de la serie. La primera voz que recibí de ella, pese a que no fue el sentimiento exacto que buscaba, me sorprendió su excelente actuación, sintiendo que era un desperdicio no haberla utilizado. Sobre todo, sentí que era buena persona; a veces le veo preocupándose por los demás.',
+      en: 'Itachi voiced Rasu, completing the last trailer of the series. The first voice I received from her, despite not being the exact feeling I was looking for, surprised me with her excellent performance — it felt like a waste not to have used it. Above all, I felt she was a good person; I sometimes see her caring about others.',
+      ja: 'イタチはラスの声を担当し、シリーズ最後のトレーラーを締めくくりました。彼女から最初に受け取った音声は、求めていたニュアンスとは少し違いましたが、その素晴らしい演技に驚かされました。使わないのはもったいないと感じるほどでした。何より、良い人だと感じました。時々、他の人を気にかけているのを見かけます。'
     }
   ],
   compositor: [
     {
-      es: 'Nanashi es de los compositores más amables que he visto. No solo en tratar conmigo, sino que además sube música libre de uso que ayuda a más personas. Su música suele ser bastante rítmica, en mi opinión.',
-      en: 'Nanashi is one of the kindest composers I\'ve ever met. Not only in dealing with me, but he also uploads royalty-free music that helps many others. His music tends to be quite rhythmic, in my opinion.',
-      ja: 'ナナシさんは私が今まで出会った中で最も親切な作曲家の一人です。私への対応だけでなく、多くの人の役に立つフリー音楽もアップロードしています。彼女の音楽は私の意見ではとてもリズミカルです。'
+      es: 'Nanashi es de los compositores más amables que he visto. No solo en tratar conmigo, sino que además sube música libre de uso que ayuda a más personas. Su música suele ser bastante rítmica, en mi opinión.\n\nMucho más adelante, compuso una música para el último tráiler y, por ende, le estoy eternamente agradecido. Agradezco la paciencia que tuvo de leer mis extensos mensajes, y su forma tan amigable de discutir conmigo.',
+      en: 'Nanashi is one of the kindest composers I\'ve ever met. Not only in dealing with me, but he also uploads royalty-free music that helps many others. His music tends to be quite rhythmic, in my opinion.\n\nMuch later on, he composed a piece for the last trailer, and for that I\'m eternally grateful. I appreciate the patience he had reading my lengthy messages, and his such friendly way of discussing things with me.',
+      ja: 'ナナシさんは私が今まで出会った中で最も親切な作曲家の一人です。私への対応だけでなく、多くの人の役に立つフリー音楽もアップロードしています。彼女の音楽は私の意見ではとてもリズミカルです。\n\nずっと後になって、最後のトレーラーのために音楽を作曲してくれました。そのことに、私は永遠に感謝しています。私の長々としたメッセージを読んでくれた忍耐力、そしてその親しみやすい話し方にも感謝しています。'
     },
     {
       es: 'Tak... Tek, no recuerdo su nombre... Le envié un DM sobre que utilizaría su música (libre de uso) y nunca me respondió (pese a que en su perfil ponía que los respondía). No puedo decir mucho de él.',
@@ -3728,76 +4843,200 @@ const COLLAB_TIPS = {
 };
 
 const COLLAB_LINKS = {
-  actor:      [null,'https://lit.link/ennbunnkata_scenario','https://lit.link/iiixsally','https://ikedoyuki.wixsite.com/voice','https://lit.link/nanairoseika','https://lit.link/df7ce0b1-696a-4514-bbe3-a56041b14ac7','https://lit.link/hanamori1015', null, null, 'https://lit.link/toooru241', 'https://x.com/depo_penguin'],
+  actor:      [null,'https://lit.link/ennbunnkata_scenario','https://lit.link/iiixsally','https://ikedoyuki.wixsite.com/voice','https://lit.link/nanairoseika','https://lit.link/df7ce0b1-696a-4514-bbe3-a56041b14ac7','https://lit.link/hanamori1015', null, null, 'https://lit.link/toooru241', 'https://x.com/depo_penguin', 'https://lit.link/takizaweb'],
   compositor: ['https://x.com/nanashigothic','https://x.com/takmfkk','https://www.youtube.com/channel/UC-X1eNg2tYeK5ONL6C3W6wg','https://x.com/pocketse', 'http://nostalgiamusic.info/index.html'],
   ilustrador: [null, null, null, null]
 };
 
-// Illustrador modals: index 1 = ilustrador_2, index 3 = ilustrador_4
-const ILUST_MODAL_INDICES = { ilustrador: { 2: 'ilust2-overlay', 4: 'ilust4-overlay' } };
+// Illustrador gallery modal builders
 
 function buildCollabGrid(id, prefix, count) {
   const c = document.getElementById(id);
   for (let i = 1; i <= count; i++) {
-    const links = COLLAB_LINKS[prefix];
-    const modalMap = ILUST_MODAL_INDICES[prefix];
-    const modalOverlayId = modalMap && modalMap[i] ? modalMap[i] : null;
-    const href = (!modalOverlayId) && links && links[i-1] != null ? links[i-1] : null;
+    const links    = COLLAB_LINKS[prefix];
+    // Ilustradores con galería propia (índice 1-based)
+    const galMap   = { ilustrador: { 2: 'ilust2-overlay', 4: 'ilust4-overlay' } };
+    const galleryId = galMap[prefix] && galMap[prefix][i] ? galMap[prefix][i] : null;
 
-    const item = document.createElement(href !== null ? 'a' : 'div');
+    const item = document.createElement('div');
     item.className = 'collab-item hov-sfx';
-    if (href !== null) { item.href = href; item.target = '_blank'; }
-    else if (modalOverlayId) {
-      item.style.cursor = 'pointer';
-      item.addEventListener('click', () => {
-        hideTip();
-        const prefixMap = { 'ilust2-overlay': 'ilustrador_2', 'ilust4-overlay': 'ilustrador_4' };
-        buildIlustModal(modalOverlayId, prefixMap[modalOverlayId]);
-        document.getElementById(modalOverlayId).classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    } else {
-      item.style.cursor = 'default';
-      item.addEventListener('click', e => e.preventDefault());
-    }
+    item.style.cursor = 'pointer';
 
     const img = document.createElement('img');
     img.src = `${prefix}_${i}.jpg`;
     img.alt = `${prefix} ${i}`;
     item.appendChild(img);
 
-    const audioId = `credit-${prefix}-${i}`;
-    item.addEventListener('mouseenter', () => {
-      playVoz(audioId);
-      const tips = COLLAB_TIPS[prefix];
-      const tip = tips && tips[i-1] ? tips[i-1][currentLang] : `${prefix} ${i}`;
-      showTip({ clientX: 0, clientY: 0 }, tip);
+    item.addEventListener('click', () => {
+      hideTip();
+      const audioId = prefix === 'ilustrador' ? null : `credit-${prefix}-${i}`;
+      const tipData = COLLAB_TIPS[prefix];
+      const tipText = tipData && tipData[i-1] ? tipData[i-1][currentLang] : '';
+      const link    = links && links[i-1] != null ? links[i-1] : null;
+      openCollabModal({
+        photo:     `${prefix}_${i}.jpg`,
+        text:      tipText,
+        audioId:   audioId,
+        link:      link,
+        galleryId: galleryId
+      });
     });
-    item.addEventListener('mousemove', e => {
-      const tips = COLLAB_TIPS[prefix];
-      const tip = tips && tips[i-1] ? tips[i-1][currentLang] : `${prefix} ${i}`;
-      showTip(e, tip);
-    });
-    item.addEventListener('mouseleave', () => { stopVoz(audioId); hideTip(); });
 
-    // Long press en móvil: mostrar tooltip sin menú contextual
+    // Hover audio (solo para actores y compositores, no ilustradores)
+    if (prefix !== 'ilustrador') {
+      const audioId = `credit-${prefix}-${i}`;
+      // Compositor 1 (Nanashi): en el hover suena el tema del tráiler
+      const hoverAudioId = audioId === 'credit-compositor-1' ? 'credit-compositor-1-extra' : audioId;
+      item.addEventListener('mouseenter', () => playVoz(hoverAudioId));
+      item.addEventListener('mouseleave', () => stopVoz(hoverAudioId));
+    }
+
+    // Long press móvil → mismo modal
     let _lpTimer = null;
-    item.addEventListener('touchstart', e => {
-      const touch = e.touches[0];
-      _lpTimer = setTimeout(() => {
-        const tips = COLLAB_TIPS[prefix];
-        const tip = tips && tips[i-1] ? tips[i-1][currentLang] : `${prefix} ${i}`;
-        showTip({ clientX: touch.clientX, clientY: touch.clientY }, tip);
-        playVoz(audioId);
-      }, 500);
+    item.addEventListener('touchstart', () => {
+      _lpTimer = setTimeout(() => item.click(), 500);
     }, { passive: true });
-    item.addEventListener('touchend',    () => { clearTimeout(_lpTimer); });
-    item.addEventListener('touchmove',   () => { clearTimeout(_lpTimer); });
-    item.addEventListener('touchcancel', () => { clearTimeout(_lpTimer); hideTip(); stopVoz(audioId); });
+    item.addEventListener('touchend',    () => clearTimeout(_lpTimer));
+    item.addEventListener('touchmove',   () => clearTimeout(_lpTimer));
+    item.addEventListener('touchcancel', () => clearTimeout(_lpTimer));
     item.addEventListener('contextmenu', e => e.preventDefault());
 
     c.appendChild(item);
   }
+}
+
+/* ══════════════════════ COLLAB MODAL ══════════════════════ */
+let _collabAudioId   = null;
+let _collabAudioId2  = null;
+let _collabGalleryId = null;
+
+function openCollabModal({ photo, text, audioId, link, galleryId }) {
+  stopVoz(_collabAudioId);
+  stopVoz(_collabAudioId2);
+  _collabAudioId   = audioId;
+  _collabGalleryId = galleryId || null;
+
+  document.getElementById('collab-modal-photo').src = photo;
+  document.getElementById('collab-modal-text').textContent = text || '—';
+
+  // Botón play: solo para actores/compositores
+  const playBtn = document.getElementById('collab-modal-play');
+  const audioEl = audioId ? document.getElementById(audioId) : null;
+  if (audioEl) {
+    playBtn.style.display = '';
+    playBtn.classList.remove('playing');
+    audioEl.onended = () => playBtn.classList.remove('playing');
+  } else {
+    playBtn.style.display = 'none';
+  }
+
+  // Botón play 2: solo para Nanashi (tema del tráiler)
+  const play2Btn = document.getElementById('collab-modal-play2');
+  const extraAudioId = audioId === 'credit-compositor-1' ? 'credit-compositor-1-extra' : null;
+  _collabAudioId2 = extraAudioId;
+  const audioEl2 = extraAudioId ? document.getElementById(extraAudioId) : null;
+  if (audioEl2) {
+    play2Btn.style.display = '';
+    play2Btn.classList.remove('playing');
+    audioEl2.onended = () => play2Btn.classList.remove('playing');
+  } else {
+    play2Btn.style.display = 'none';
+  }
+
+  // Botón galería: solo para ilustradores con galería
+  const galleryBtn = document.getElementById('collab-modal-gallery');
+  galleryBtn.style.display = galleryId ? '' : 'none';
+
+  // Botón perfil
+  const profileBtn = document.getElementById('collab-modal-profile');
+  if (link) {
+    profileBtn.href = link;
+    profileBtn.removeAttribute('data-unavailable');
+    profileBtn.style.pointerEvents = '';
+    profileBtn.style.opacity = '';
+  } else {
+    profileBtn.href = '#';
+    profileBtn.setAttribute('data-unavailable', '1');
+    profileBtn.style.pointerEvents = 'none';
+    profileBtn.style.opacity = '0.22';
+  }
+
+  applyLang(currentLang);
+  document.getElementById('collab-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openCollabGallery() {
+  if (!_collabGalleryId) return;
+  const prefixMap = { 'ilust2-overlay': 'ilustrador_2', 'ilust4-overlay': 'ilustrador_4' };
+  buildIlustModal(_collabGalleryId, prefixMap[_collabGalleryId]);
+  document.getElementById(_collabGalleryId).classList.add('open');
+  // No cerramos el collab modal: la galería aparece encima (z-index 3500 > 3000)
+}
+
+function toggleCollabAudio() {
+  const btn     = document.getElementById('collab-modal-play');
+  const audioEl = document.getElementById(_collabAudioId);
+  if (!audioEl) return;
+
+  if (btn.classList.contains('playing')) {
+    // Estaba sonando: parar
+    stopVoz(_collabAudioId);
+    btn.classList.remove('playing');
+  } else {
+    // Parar el otro reproductor si estaba sonando
+    const btn2 = document.getElementById('collab-modal-play2');
+    if (btn2 && btn2.classList.contains('playing')) {
+      stopVoz(_collabAudioId2);
+      btn2.classList.remove('playing');
+    }
+    // Reiniciar siempre desde el principio
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    activeVoz = null;          // forzar que playVozDirect lo trate como nuevo
+    playVozDirect(_collabAudioId);
+    btn.classList.add('playing');
+    audioEl.onended = () => btn.classList.remove('playing');
+  }
+}
+
+function toggleCollabAudio2() {
+  const btn     = document.getElementById('collab-modal-play2');
+  const audioEl = document.getElementById(_collabAudioId2);
+  if (!audioEl) return;
+
+  if (btn.classList.contains('playing')) {
+    // Estaba sonando: parar
+    stopVoz(_collabAudioId2);
+    btn.classList.remove('playing');
+  } else {
+    // Parar el otro reproductor si estaba sonando
+    const btn1 = document.getElementById('collab-modal-play');
+    if (btn1 && btn1.classList.contains('playing')) {
+      stopVoz(_collabAudioId);
+      btn1.classList.remove('playing');
+    }
+    // Reiniciar siempre desde el principio
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    activeVoz = null;          // forzar que playVozDirect lo trate como nuevo
+    playVozDirect(_collabAudioId2);
+    btn.classList.add('playing');
+    audioEl.onended = () => btn.classList.remove('playing');
+  }
+}
+
+function closeCollabModal() {
+  stopVoz(_collabAudioId);
+  stopVoz(_collabAudioId2);
+  document.getElementById('collab-modal-play').classList.remove('playing');
+  document.getElementById('collab-modal-play2').classList.remove('playing');
+  document.getElementById('collab-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function collabModalOverlayClick(e) {
+  if (e.target.id === 'collab-modal-overlay') closeCollabModal();
 }
 
 /* ══ Ilustrador modals grid builders — fixed arrays ══ */
@@ -3849,7 +5088,46 @@ function playHoverSfx() {
 
 let activeVoz = null;
 
+/* ══ CONTROL DE SONIDOS HOVER ══ */
+let hoverSoundEnabled = false;
+
+function toggleHoverSound() {
+  const btn = document.getElementById('btn-toggle-sound');
+  hoverSoundEnabled = !hoverSoundEnabled;
+
+  if (hoverSoundEnabled) {
+    btn.classList.add('sound-on');
+    // Actualiza texto en los tres idiomas
+    btn.querySelector('.t-es').textContent = '🔊 Activar/apagar sonido';
+    btn.querySelector('.t-en').textContent = '🔊 Turn sound on/off';
+    btn.querySelector('.t-ja').textContent = '🔊 サウンドのON/OFF';
+    // El click en este botón desbloquea el contexto de audio del navegador.
+    // Reproducimos y pausamos un audio silencioso para desbloquearlo
+    // (usamos otro audio distinto a sfx-hover para no interferir con su sonido).
+    const cualquiera = document.getElementById('sfx-logo');
+    if (cualquiera) {
+      cualquiera.volume = 0;
+      cualquiera.play().then(() => cualquiera.pause()).catch(() => {});
+    }
+    // Confirmación audible de que los sonidos ya están activos
+    playHoverSfx();
+  } else {
+    stopVoz(activeVoz ? activeVoz.id : null);
+    btn.classList.remove('sound-on');
+    btn.querySelector('.t-es').textContent = '🔊 Activar/apagar sonido';
+    btn.querySelector('.t-en').textContent = '🔊 Turn sound on/off';
+    btn.querySelector('.t-ja').textContent = '🔊 サウンドのON/OFF';
+    // Excepción: aunque se estén deshabilitando los sonidos, este botón siempre suena
+    playHoverSfx();
+  }
+}
+
 function playVoz(id) {
+  if (!hoverSoundEnabled) return;
+  playVozDirect(id);
+}
+
+function playVozDirect(id) {
   const next = document.getElementById(id);
   if (!next) return;
   if (activeVoz && activeVoz === next) return;
@@ -3917,7 +5195,20 @@ function openModal(novel) {
   hideTip();
   const L = currentLang;
   document.getElementById('m-title').textContent   = novel.title[L];
-  document.getElementById('m-slogan').textContent  = novel.slogan[L];
+
+  /* Lema clicable: reproducir audio del lema */
+  const sloganEl = document.getElementById('m-slogan');
+  const vozEl    = novel.vozId ? document.getElementById(novel.vozId) : null;
+  sloganEl.textContent = novel.slogan[L];
+  sloganEl.classList.remove('playing');
+  if (vozEl) {
+    sloganEl.setAttribute('data-voz', novel.vozId);
+    sloganEl.style.cursor = 'pointer';
+    vozEl.onended = () => sloganEl.classList.remove('playing');
+  } else {
+    sloganEl.removeAttribute('data-voz');
+    sloganEl.style.cursor = 'default';
+  }
   document.getElementById('m-badge').textContent   = novel.free[L];
   document.getElementById('m-pages').textContent   = novel.pages[L];
   document.getElementById('m-genres').textContent  = novel.genres[L];
@@ -4025,6 +5316,9 @@ function openModal(novel) {
   }
 }
 function closeModal() {
+  const sloganEl = document.getElementById('m-slogan');
+  const vozId    = sloganEl.getAttribute('data-voz');
+  if (vozId) { stopVoz(vozId); sloganEl.classList.remove('playing'); }
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
   document.getElementById('m-yt').innerHTML = '';
@@ -4126,6 +5420,7 @@ const LOGO_VOLUME = 0.1;
 
 const cLogo = document.getElementById('centerLogo');
 cLogo.addEventListener('mouseenter', () => {
+  if (!hoverSoundEnabled) return;
   const el = document.getElementById('sfx-logo');
   if (!el) return;
   if (activeVoz && activeVoz === el) return;
@@ -4153,6 +5448,25 @@ cLogo.addEventListener('mouseleave', () => {
 cLogo.addEventListener('mousemove', e => showTip(e, 'Lekim-sama'));
 cLogo.addEventListener('mouseleave', hideTip);
 cLogo.addEventListener('click', openLogoModal);
+
+function toggleLogoAudio() {
+  const btn = document.getElementById('logo-modal-play-btn');
+  const el  = document.getElementById('sfx-logo');
+  if (!el) return;
+  if (btn.classList.contains('playing')) {
+    stopVoz('sfx-logo');
+    btn.classList.remove('playing');
+  } else {
+    activeVoz = null;
+    el.currentTime = 0;
+    el.volume = 0;
+    el.play().catch(() => {});
+    fadeTo(el, LOGO_VOLUME, 350);
+    activeVoz = el;
+    btn.classList.add('playing');
+    el.onended = () => { btn.classList.remove('playing'); if (activeVoz === el) activeVoz = null; };
+  }
+}
 
 const LOGO_MODAL_CONTENT = {
   title: {
@@ -4219,6 +5533,8 @@ function closeLogoModal() {
   const el = document.getElementById('sfx-logo');
   if (el) el.loop = false;
   stopVoz('sfx-logo');
+  const btn = document.getElementById('logo-modal-play-btn');
+  if (btn) btn.classList.remove('playing');
 }
 function logoOverlayClick(e) {
   if (e.target.id === 'logo-modal-overlay') closeLogoModal();
@@ -4286,6 +5602,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 function goTo(id) {
   closeSidebar();
+
+  // Si los rombos están abiertos, volver al catálogo antes de navegar
+  const rombos = document.getElementById('rombos-wrapper');
+  if (rombos && rombos.style.display !== 'none') {
+    ocultarRombos();
+  }
+
   const el = document.getElementById(id);
   if (!el) return;
   if (id === 'novelas') {
@@ -4301,7 +5624,7 @@ function goTo(id) {
 document.addEventListener('DOMContentLoaded', () => {
   const detectedLang = detectLang();
   buildDiamonds();
-  buildCollabGrid('voiceGrid',    'actor',      11);
+  buildCollabGrid('voiceGrid',    'actor',      12);
   buildCollabGrid('composerGrid', 'compositor', 5);
   buildCollabGrid('artistGrid',   'ilustrador', 4);
   setLang(detectedLang);
@@ -4376,6 +5699,35 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') illusViewerNext();
   if (e.key === 'Escape')     closeIllusViewer();
 });
+
+/* ══════════════════════ SOBRE MÍ — ACORDEÓN ══════════════════════ */
+function toggleSobreAccordion(btn) {
+  const panel = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  panel.classList.toggle('open', !isOpen);
+}
+
+function toggleModalVoz() {
+  const sloganEl = document.getElementById('m-slogan');
+  const vozId    = sloganEl.getAttribute('data-voz');
+  if (!vozId) return;
+  const audioEl = document.getElementById(vozId);
+  if (!audioEl) return;
+
+  if (sloganEl.classList.contains('playing')) {
+    stopVoz(vozId);
+    sloganEl.classList.remove('playing');
+  } else {
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    activeVoz = null;
+    playVozDirect(vozId);
+    sloganEl.classList.add('playing');
+    audioEl.onended = () => sloganEl.classList.remove('playing');
+  }
+}
 
 /* ══════════════════════ MODAL ACLARACIONES ══════════════════════ */
 const ACL_DATA = {
@@ -4472,6 +5824,84 @@ function closeSidebar() {
   document.getElementById('menu-toggle').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+/* ══════════════════ MODAL TRÁILER GLOBAL ══════════════════ */
+/*
+  ID de vídeo de YouTube por idioma.
+*/
+const TRAILER_YT_ID = { es: '2psfTPF9O1w', en: 'T4qAMnHMvSA', ja: 'LbXkHNl4jJY' };
+
+function abrirTrailer() {
+  playHoverSfx();
+  const overlay = document.getElementById('trailer-overlay');
+  const iframe  = document.getElementById('trailer-iframe');
+
+  // Construir la src solo al abrir (evita que YouTube cargue en background)
+  const ytId = TRAILER_YT_ID[currentLang] || TRAILER_YT_ID.es;
+  iframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&enablejsapi=1&rel=0`;
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarTrailer() {
+  playHoverSfx();
+  const overlay = document.getElementById('trailer-overlay');
+  const iframe  = document.getElementById('trailer-iframe');
+
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+
+  // Vaciar src para detener el vídeo y liberar recursos
+  iframe.src = '';
+}
+/* ══════════════════ CARRUSEL FOCO ══════════════════ */
+(function() {
+  const TOTAL = 2;
+  let current = 0;
+
+  function updateFocus() {
+    for (let i = 0; i < TOTAL; i++) {
+      const card = document.getElementById('fcard-' + i);
+      if (!card) continue;
+      card.classList.remove('fc-active', 'fc-prev', 'fc-next', 'fc-hidden');
+      const diff = i - current;
+      if      (diff === 0)  card.classList.add('fc-active');
+      else if (diff === 1)  card.classList.add('fc-next');
+      else if (diff === -1) card.classList.add('fc-prev');
+      else                  card.classList.add('fc-hidden');
+    }
+    // Flechas
+    const prev = document.getElementById('carousel-prev');
+    const next = document.getElementById('carousel-next');
+    if (prev) prev.classList.toggle('hidden', current === 0);
+    if (next) next.classList.toggle('hidden', current === TOTAL - 1);
+    // Dots
+    document.querySelectorAll('.cdot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+    });
+  }
+
+  window.carouselNav   = function(dir)   { current = Math.max(0, Math.min(TOTAL - 1, current + dir)); updateFocus(); };
+  window.carouselGoTo  = function(index) { current = Math.max(0, Math.min(TOTAL - 1, index));         updateFocus(); };
+  window.carouselCurrent = function()    { return current; };
+
+  updateFocus();
+
+  // Navegación con flechas ←/→ del teclado mientras el ratón está sobre el carrusel
+  // (portada_es_correcto.jpg, su texto de páginas/géneros, o la tarjeta "Próximamente")
+  let _hoveringCover = false;
+  const _focusStage = document.getElementById('focus-stage');
+  if (_focusStage) {
+    _focusStage.addEventListener('mouseenter', () => { _hoveringCover = true; });
+    _focusStage.addEventListener('mouseleave', () => { _hoveringCover = false; });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!_hoveringCover) return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); carouselNav(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); carouselNav(1); }
+  });
+})();
 
 </script>
 
@@ -4596,6 +6026,72 @@ function closeSidebar() {
       </a>
     </div>
     <div class="ilust-grid"></div>
+  </div>
+</div>
+
+<!-- ════════ COLLAB MODAL ════════ -->
+<div id="collab-modal-overlay" onclick="collabModalOverlayClick(event)">
+  <div id="collab-modal-box">
+    <span class="modal-close hov-sfx" onclick="closeCollabModal()">✕</span>
+
+    <div id="collab-modal-header">
+      <img id="collab-modal-photo" src="" alt="">
+      <span id="collab-modal-name"></span>
+    </div>
+
+    <div id="collab-modal-body">
+      <p id="collab-modal-text"></p>
+    </div>
+
+    <div id="collab-modal-footer">
+      <!-- Botón audio (actores, compositores) -->
+      <button class="collab-modal-btn hov-sfx" id="collab-modal-play" onclick="toggleCollabAudio()">
+        <span id="collab-modal-play-icon"></span>
+        <span class="t-es">Reproducir</span>
+        <span class="t-en">Play</span>
+        <span class="t-ja">再生</span>
+      </button>
+      <!-- Botón audio extra (solo Nanashi, tráiler) -->
+      <button class="collab-modal-btn hov-sfx" id="collab-modal-play2" onclick="toggleCollabAudio2()" style="display:none">
+        <span id="collab-modal-play2-icon"></span>
+        <span class="t-es">¿Es correcto el gothic?</span>
+        <span class="t-en">Is it right, the Gothic?</span>
+        <span class="t-ja">正しいゴシック？</span>
+      </button>
+      <!-- Botón galería (ilustradores) -->
+      <button class="collab-modal-btn hov-sfx" id="collab-modal-gallery" onclick="openCollabGallery()">
+        <span class="t-es">Ver ilustraciones</span>
+        <span class="t-en">View illustrations</span>
+        <span class="t-ja">イラストを見る</span>
+      </button>
+      <a class="collab-modal-btn hov-sfx" id="collab-modal-profile" href="#" target="_blank">
+        <span class="t-es">Visitar perfil</span>
+        <span class="t-en">Visit profile</span>
+        <span class="t-ja">プロフィールへ</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ MODAL TRÁILER GLOBAL ══════════════════ -->
+<!--
+  Para añadir tu tráiler: sustituye TU_VIDEO_ID por el ID de YouTube.
+  Ejemplo: si la URL es https://www.youtube.com/watch?v=dQw4w9WgXcQ
+  el ID es "dQw4w9WgXcQ".
+  El parámetro enablejsapi=1 permite detener el vídeo al cerrar el modal.
+-->
+<div id="trailer-overlay" onclick="cerrarTrailer()">
+  <div id="trailer-box" onclick="event.stopPropagation()">
+    <button id="trailer-close" onclick="cerrarTrailer()">✕</button>
+    <div id="trailer-video-wrap">
+      <iframe
+        id="trailer-iframe"
+        src=""
+        title="Tráiler Global — ¿Es correcto...?"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 </div>
 
