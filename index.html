@@ -38,12 +38,13 @@
   --gap: 1px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Klee One', serif;
+  overflow-x: hidden;
 }
 
 /* ════════════════════ CURSOR TIP ════════════════════ */
@@ -822,6 +823,9 @@ nav {
   object-fit: cover;
   border: 1px solid rgba(255,255,255,0.18);
   display: block;
+  user-select: none; -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
 }
 #collab-modal-name {
   display: none;
@@ -2211,10 +2215,25 @@ nav {
   }
   .serie-cover-item img,
   .serie-placeholder-card {
-    height: 340px;
+    height: 320px; /* proporción 3:4 real de 1152×1536 para el ancho de 240px */
     max-width: 240px;
     width: 240px;
   }
+
+  /* Contenedor de la portada y botones a la misma anchura, centrados entre sí */
+  .cover-hit-area {
+    width: 240px;
+    align-items: center;
+  }
+  .cover-shop-btn,
+  .btn-trailer {
+    width: 240px;
+  }
+
+  /* Flechas del carrusel: hacia dentro del stage para no provocar overflow horizontal */
+  #carousel-prev { left: 4px; padding: 1rem 0.4rem; }
+  #carousel-next { right: 4px; padding: 1rem 0.4rem; }
+  .carousel-arrow { top: 192px; } /* dots (~32px) + mitad de la imagen (160px) */
 }
 
 /* Botón "Volver a las series" — sutil, coherente con el estilo general */
@@ -4916,7 +4935,10 @@ function openCollabModal({ photo, text, audioId, link, galleryId }) {
   _collabAudioId   = audioId;
   _collabGalleryId = galleryId || null;
 
-  document.getElementById('collab-modal-photo').src = photo;
+  const collabPhotoEl = document.getElementById('collab-modal-photo');
+  collabPhotoEl.src = photo;
+  collabPhotoEl.oncontextmenu = () => false;
+  collabPhotoEl.ondragstart = () => false;
   document.getElementById('collab-modal-text').textContent = text || '—';
 
   // Botón play: solo para actores/compositores
@@ -6034,8 +6056,8 @@ function cerrarTrailer() {
   <div id="collab-modal-box">
     <span class="modal-close hov-sfx" onclick="closeCollabModal()">✕</span>
 
-    <div id="collab-modal-header">
-      <img id="collab-modal-photo" src="" alt="">
+    <div id="collab-modal-header" oncontextmenu="return false">
+      <img id="collab-modal-photo" src="" alt="" draggable="false" oncontextmenu="return false" ondragstart="return false">
       <span id="collab-modal-name"></span>
     </div>
 
