@@ -4750,9 +4750,9 @@ function buildDiamonds() {
 const COLLAB_TIPS = {
   actor: [
     {
-      es: 'Sakichi fue la primera en poner voz a un tráiler y, en su momento, me entregó muchos intentos al no tener experiencia como actora de voz. Hizo la voz de Nugu, ??? y Fukou.',
-      en: 'Sakichi was the first to voice a trailer and at the time gave me many attempts, having no experience as a voice actress. She voiced Nugu, ??? and Fukou.',
-      ja: 'さきち様はトレーラーに最初に声を当てた人で、当時は声優経験がなく何度も録り直してくれました。ヌグ、???、フコウを担当しました。'
+      es: 'Sakichi fue la primera en poner voz a un tráiler y, en su momento, me entregó muchos intentos al no tener experiencia como actora de voz. Hizo la voz de Nugu, ??? y Fukou.\n\nPara la voz de Fukou, aceptó en febrero y lo recibí en mayo, siendo la entrega más lenta. (Aclaración: Siempre que digo lento, no lo digo de forma negativa; no hubo problema porque yo suelo dar bastante margen: medio año o un año. Yo aún estaba trabajando con la novela). Cuando le envié un agradecimiento tras el tráiler final, no me respondió; esperemos que se encuentre bien.',
+      en: 'Sakichi was the first to voice a trailer and at the time gave me many attempts, having no experience as a voice actress. She voiced Nugu, ??? and Fukou.\n\nFor Fukou\'s voice, she accepted in February and I received it in May, making it the slowest delivery. (Clarification: Whenever I say slow, I don\'t mean it negatively; there was no problem because I usually give quite a lot of margin: half a year or a year. I was still working on the novel at the time). When I sent her a thank-you message after the final trailer, she didn\'t reply; let\'s hope she is doing well.',
+      ja: 'さきちさんは最初にトレーラーに声を当てた人で、当時は声優としての経験がなく、多くのテイクを送ってくれました。ヌグ、??? そしてフコウの声を担当しました。\n\nフコウの声については、2月に了承を得て、受け取ったのは5月で、最も遅い納品となりました。（補足：遅いと言っても、決してネガティブな意味ではありません。私は通常かなりの余裕を持って期限を設けているため、問題はありませんでした。半年から1年ほどです。私もまだ小説の制作中でした）。最終トレーラー完成後にお礼のメッセージを送りましたが、返信はありませんでした。元気でいてくれることを願っています。'
     },
     {
       es: 'Shio, casualmente, tenía un erizo de mascota; puso voz a Menmei. Nadie más encajaba mejor que ella en ese papel. De vez en cuando, va publicando cuentos cortos. Por un momento me asustó cuando se fue de X, pero regresó por sentirse sola.',
@@ -4864,7 +4864,7 @@ const COLLAB_TIPS = {
 const COLLAB_LINKS = {
   actor:      [null,'https://lit.link/ennbunnkata_scenario','https://lit.link/iiixsally','https://ikedoyuki.wixsite.com/voice','https://lit.link/nanairoseika','https://lit.link/df7ce0b1-696a-4514-bbe3-a56041b14ac7','https://lit.link/hanamori1015', null, null, 'https://lit.link/toooru241', 'https://x.com/depo_penguin', 'https://lit.link/takizaweb'],
   compositor: ['https://x.com/nanashigothic','https://x.com/takmfkk','https://www.youtube.com/channel/UC-X1eNg2tYeK5ONL6C3W6wg','https://x.com/pocketse', 'http://nostalgiamusic.info/index.html'],
-  ilustrador: [null, null, null, null]
+  ilustrador: [null, null, null, 'https://xfolio.jp/portfolio/ranaya1346']
 };
 
 // Illustrador gallery modal builders
@@ -4976,11 +4976,17 @@ function openCollabModal({ photo, text, audioId, link, galleryId }) {
     profileBtn.removeAttribute('data-unavailable');
     profileBtn.style.pointerEvents = '';
     profileBtn.style.opacity = '';
+    profileBtn.querySelector('.t-es').textContent = 'Visitar perfil';
+    profileBtn.querySelector('.t-en').textContent = 'Visit profile';
+    profileBtn.querySelector('.t-ja').textContent = 'プロフィールへ';
   } else {
     profileBtn.href = '#';
     profileBtn.setAttribute('data-unavailable', '1');
     profileBtn.style.pointerEvents = 'none';
     profileBtn.style.opacity = '0.22';
+    profileBtn.querySelector('.t-es').textContent = 'Perfil no disponible';
+    profileBtn.querySelector('.t-en').textContent = 'Profile not available';
+    profileBtn.querySelector('.t-ja').textContent = 'プロフィール非公開';
   }
 
   applyLang(currentLang);
