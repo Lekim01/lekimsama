@@ -342,21 +342,23 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.85);
-  font-family: inherit;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-left: 3px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.35);
+  font-family: 'Klee One', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
+  padding: 0.35rem 0.75rem 0.35rem 0.6rem;
   margin-bottom: 1.2rem;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 .volver-inicio-btn:hover {
-  background: rgba(255,255,255,0.14);
-  color: #fff;
-  border-color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.85);
+  border-left-color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.04);
 }
 .volver-inicio-btn-bottom {
   margin-top: 1rem;
@@ -2358,29 +2360,6 @@ nav {
   .carousel-arrow { top: 192px; } /* dots (~32px) + mitad de la imagen (160px) */
 }
 
-/* Botón "Volver a las series" — sutil, coherente con el estilo general */
-#btn-volver-series {
-  /* Debajo del botón Orden de lectura, dentro del wrapper fixed */
-  position: static;
-  margin-top: 0.6rem;
-  background: transparent;
-  border: none;
-  border-left: 3px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.35);
-  font-family: 'Klee One', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 0.35rem 0.75rem 0.35rem 0.6rem;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-  display: block;
-}
-#btn-volver-series:hover {
-  color: rgba(255,255,255,0.85);
-  border-left-color: rgba(255,255,255,0.65);
-  background: rgba(255,255,255,0.04);
-}
 .acl-back {
   display: inline-flex;
   align-items: center;
@@ -2591,6 +2570,11 @@ nav {
 
     <!-- ══ ORDEN DE LECTURA + VOLVER — absolute dentro de #novelas ══ -->
     <div id="orden-lectura-wrapper" style="display:none;">
+      <button id="btn-volver-series" class="hov-sfx volver-inicio-btn" onclick="goTo('novelas')">
+        <span class="t-es">⬅ Volver a Inicio</span>
+        <span class="t-en">⬅ Back to Home</span>
+        <span class="t-ja">⬅ ホームに戻る</span>
+      </button>
       <button id="orden-lectura-btn" onclick="toggleOrdenLectura()" class="hov-sfx">
         <span class="t-es">Orden de lectura</span>
         <span class="t-en">Reading order</span>
@@ -2598,29 +2582,21 @@ nav {
       </button>
       <div id="orden-lectura-panel">
         <div class="t-es">
-          <p>No hay un orden; pero si eres indeciso, puedes elegir entre estos:</p>
-          <div class="orden-item"><span class="orden-label">Si eres paciente para leer historias largas:</span> Rojo, blanco, azul, naranja, morado, verde y gris. <em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">(Orden en que fueron escritas)</em></div>
-          <div class="orden-item"><span class="orden-label">Si prefieres algo más rápido:</span> Azul, morado, naranja, verde, blanco, rojo, gris.</div>
-          <div class="orden-item"><span class="orden-label">Si empiezas por lo gratis:</span> Morado, naranja, blanco, verde, gris, azul, rojo.</div>
+          <p>No hay un orden de lectura más allá de que "¿Es correcto ser?" se deba leer el último.</p>
+          <p>Yo recomendaría empezar por "¿Es correcto temer a la felicidad?" si eres paciente, por ser una lectura larga; o "¿Es correcto buscar la verdad?" si quieres algo más ligero, y dejar las historias cortas para después.<br>No hay problema con leerlo como está ordenado en la edición completa.</p>
+          <p>Si empiezas por lo gratis: Morado, naranja, blanco y verde puede estar bien, creo.</p>
         </div>
         <div class="t-en">
-          <p>There is no set order; but if you're undecided, you can choose from these:</p>
-          <div class="orden-item"><span class="orden-label">If you're patient for long stories:</span> Red, white, blue, orange, purple, green and grey. <em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">(Order they were written)</em></div>
-          <div class="orden-item"><span class="orden-label">If you prefer something shorter:</span> Blue, purple, orange, green, white, red, grey.</div>
-          <div class="orden-item"><span class="orden-label">If you start with the free ones:</span> Purple, orange, white, green, grey, blue, red.</div>
+          <p>There's no real reading order, other than "Is it right to be?" needing to be read last.</p>
+          <p>I'd recommend starting with "Is it right to fear happiness?" if you're patient, since it's a long read; or "Is it right to seek the truth?" if you want something lighter, leaving the short stories for later.<br>There's no problem reading it in the order it appears in the complete edition.</p>
+          <p>If you're starting with the free ones: Purple, orange, white and green should be fine, I think.</p>
         </div>
         <div class="t-ja">
-          <p>順番は決まっていませんが、迷っている方はこちらを参考にどうぞ：</p>
-          <div class="orden-item"><span class="orden-label">長い話をじっくり読みたい方：</span> 赤、白、青、橙、紫、緑、灰。<em style="color:rgba(255,255,255,0.4);font-size:0.73rem;">（執筆順）</em></div>
-          <div class="orden-item"><span class="orden-label">短めのものから始めたい方：</span> 青、紫、橙、緑、白、赤、灰。</div>
-          <div class="orden-item"><span class="orden-label">無料作品から始めたい方：</span> 紫、橙、白、緑、灰、青、赤。</div>
+          <p>「在るのは正しいか？」を最後に読む以外、特に決まった読む順番はありません。</p>
+          <p>気が長い方には長編の「幸せを恐れるのは正しいか？」から、もう少し軽いものがよければ「真実を探すのは正しいか？」から始めて、短編は後に取っておくのがおすすめです。<br>完全版に収録されている順番のまま読んでも問題ありません。</p>
+          <p>無料作品から始めるなら、紫、橙、白、緑あたりで大丈夫だと思います。</p>
         </div>
       </div>
-      <button id="btn-volver-series" onclick="ocultarRombos()">
-        <span class="t-es">← Volver atrás</span>
-        <span class="t-en">← Go back</span>
-        <span class="t-ja">← 戻る</span>
-      </button>
     </div>
 
     <!-- ══ AVISOS movidos al sidebar ══ -->
