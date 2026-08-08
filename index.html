@@ -122,6 +122,60 @@ nav {
   background: rgba(255,255,255,0.06);
 }
 
+/* ════════════════════ NAVBAR — DROPDOWNS ════════════════════ */
+.nav-item-dropdown { position: relative; }
+.nav-links a.nav-dropdown-trigger { gap: 0.45rem; }
+.nav-caret {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+.nav-caret-side { width: 6px; height: 10px; }
+.nav-item-dropdown.open > .nav-dropdown-trigger .nav-caret {
+  transform: rotate(180deg);
+}
+.nav-caret-side.nav-caret { transform: none; }
+.nav-item-dropdown.open > .nav-dropdown-trigger .nav-caret-side {
+  transform: rotate(90deg);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  min-width: 200px;
+  background: rgba(10,10,10,0.98);
+  border: 1px solid rgba(255,255,255,0.25);
+  z-index: 1150;
+}
+.nav-dropdown-menu.level-1 {
+  top: 100%;
+  left: 0;
+  border-top: none;
+}
+.nav-dropdown-menu.level-2 {
+  top: -1px;
+  left: 100%;
+}
+.nav-item-dropdown.open > .nav-dropdown-menu {
+  display: flex;
+}
+.nav-dropdown-menu a {
+  border-right: none;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  height: 42px;
+  padding: 0 1.1rem;
+  white-space: nowrap;
+  justify-content: space-between;
+}
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+
 /* ════════════════════ SIDEBAR — FIXED ════════════════════ */
 #sidebar {
   position: fixed;
@@ -274,13 +328,49 @@ nav {
   padding-top: 50px;
 }
 
+/*
+  Vistas de pantalla única (Inicio y Sobre mí): el bloqueo de scroll de
+  página se decide dinámicamente por JS (ver evaluateSingleScreenLock),
+  comprobando si el contenido cabe en la ventana actual. No forzamos
+  ninguna altura aquí para evitar que el contenido se recorte o que el
+  borde inferior quede superpuesto cuando la ventana es más pequeña.
+*/
+#sobre-mi {
+  box-sizing: border-box;
+}
+.volver-inicio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.85);
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.volver-inicio-btn:hover {
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  border-color: rgba(255,255,255,0.6);
+}
+.volver-inicio-btn-bottom {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
 /* ════════════════════ NOVELAS ════════════════════ */
 #novelas {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
+  box-sizing: border-box;
   border-bottom: 3px solid rgba(255,255,255,1);
   background-color: #000;
   background-image: url('fondo_novelas.jpg');
@@ -1448,7 +1538,7 @@ nav {
 
   /* ── GRID de rombos ── */
   .grid-wrapper { padding: 40px 16px; }
-  #novelas { min-height: 100svh; }
+  #novelas { min-height: calc(100svh - 50px); }
 
   /* ── Texto de rombos escalado (cell 130px vs 180px base = ~72%) ── */
   .rombo .r-title  { font-size: 0.72rem; }
@@ -1485,8 +1575,40 @@ nav {
 @media (max-width: 600px) {
   :root { --cell: 88px; }
 
-  /* Ocultar nav-links: todo va en la sidebar */
-  .nav-links { display: none; }
+  /* Nav compacto: el logo se trunca si hace falta, y el menú
+     (con el desplegable) no se encoge para que siga siendo legible */
+  .nav-logo {
+    font-size: 0.8rem !important;
+    max-width: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .nav-links { flex-shrink: 0; }
+  .nav-links a { font-size: 0.62rem; padding: 0 0.5rem; }
+
+  /* El desplegable pasa a ocupar todo el ancho, anclado bajo la barra,
+     para no salirse de la pantalla en móviles estrechos */
+  .nav-dropdown-menu.level-1 {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
+    border-left: none;
+    border-right: none;
+  }
+  /* El submenú (Novelas/Extras/Créditos) se apila debajo en vez de
+     desplegarse hacia el lateral */
+  .nav-dropdown-menu.level-2 {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .nav-dropdown-menu.level-2 a { padding-left: 2rem; }
 
   /* Grid más compacto */
   .grid-wrapper { padding: 20px 8px; }
@@ -2344,12 +2466,34 @@ nav {
   <div class="nav-logo hov-sfx" onclick="goTo('novelas')"><span class="t-es">Lekim-sama</span><span class="t-en">Lekim-sama</span><span class="t-ja">Lekim-sama</span></div>
   <div class="nav-links">
     <a class="hov-sfx" onclick="goTo('novelas')">
-      <span class="t-es">Novelas</span><span class="t-en">Novels</span><span class="t-ja">小説</span>
+      <span class="t-es">Inicio</span><span class="t-en">Home</span><span class="t-ja">ホーム</span>
     </a>
-    <a class="hov-sfx" onclick="goTo('extras')">
-      <span class="t-es">Extras</span><span class="t-en">Extras</span><span class="t-ja">エクストラ</span>
-    </a>
-    <a class="hov-sfx" onclick="goTo('creditos')">
+    <div class="nav-item-dropdown" id="nav-dd-novelas">
+      <a class="hov-sfx nav-dropdown-trigger" onclick="toggleNavDropdown(event, 'nav-dd-novelas')">
+        <span class="t-es">Novelas</span><span class="t-en">Novels</span><span class="t-ja">小説</span>
+        <svg class="nav-caret" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg"><polyline points="1,1 5,5 9,1"/></svg>
+      </a>
+      <div class="nav-dropdown-menu level-1">
+        <div class="nav-item-dropdown" id="nav-dd-escorrecto">
+          <a class="hov-sfx nav-dropdown-trigger" onclick="toggleNavDropdown(event, 'nav-dd-escorrecto')">
+            <span class="t-es">¿Es correcto...?</span><span class="t-en">Is it right...?</span><span class="t-ja">…は正しいか？</span>
+            <svg class="nav-caret nav-caret-side" viewBox="0 0 6 10" xmlns="http://www.w3.org/2000/svg"><polyline points="1,1 5,5 1,9"/></svg>
+          </a>
+          <div class="nav-dropdown-menu level-2">
+            <a class="hov-sfx" onclick="goTo('rombos')">
+              <span class="t-es">Novelas</span><span class="t-en">Novels</span><span class="t-ja">小説</span>
+            </a>
+            <a class="hov-sfx" onclick="goTo('extras')">
+              <span class="t-es">Extras</span><span class="t-en">Extras</span><span class="t-ja">エクストラ</span>
+            </a>
+            <a class="hov-sfx" onclick="goTo('creditos')">
+              <span class="t-es">Créditos</span><span class="t-en">Credits</span><span class="t-ja">クレジット</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="hov-sfx" onclick="goTo('creditos-solo')">
       <span class="t-es">Créditos</span><span class="t-en">Credits</span><span class="t-ja">クレジット</span>
     </a>
     <a class="hov-sfx" onclick="goTo('sobre-mi')">
@@ -2629,7 +2773,7 @@ nav {
   </section>
 
   <!-- EXTRAS -->
-  <div id="extras" style="border-bottom: 3px solid rgba(255,255,255,1);">
+  <div id="extras" style="border-bottom: 3px solid rgba(255,255,255,1); display:none;">
     <div class="section-inner" style="padding-bottom: 2rem;">
       <h2 class="sec-title" data-i18n='{"es":"Extras","en":"Extras","ja":"エクストラ"}'></h2>
 
@@ -2699,8 +2843,11 @@ nav {
   </div>
 
   <!-- CRÉDITOS -->
-  <div id="creditos" style="border-bottom: 3px solid rgba(255,255,255,1);">
+  <div id="creditos" style="border-bottom: 3px solid rgba(255,255,255,1); display:none;">
     <div class="section-inner">
+      <button id="creditos-volver-top" class="hov-sfx volver-inicio-btn" onclick="goTo('novelas')" style="display:none;">
+        <span class="t-es">⬅ Volver a Inicio</span><span class="t-en">⬅ Back to Home</span><span class="t-ja">⬅ ホームに戻る</span>
+      </button>
       <h2 class="sec-title" data-i18n='{"es":"Créditos","en":"Credits","ja":"クレジット"}'></h2>
       <p class="sec-subtitle" data-i18n='{"es":"Gracias a los que me prestaron su ayuda. Por ahora no tuve ningún problema con ellos e hicieron un buen trabajo.","en":"Thanks to everyone who helped me. So far I haven&#39;t had any problems with them and they did a great job.","ja":"助けてくれた皆さんに感謝します。今のところ何の問題もなく、素晴らしい仕事をしてくれました。"}'></p>
       <p class="cred-block-title" data-i18n='{"es":"Actores de voz","en":"Voice Actors","ja":"声優"}'></p>
@@ -2709,12 +2856,18 @@ nav {
       <div class="collab-grid" id="composerGrid"></div>
       <p class="cred-block-title" data-i18n='{"es":"Ilustrador","en":"Illustrator","ja":"イラストレーター"}'></p>
       <div class="collab-grid" id="artistGrid"></div>
+      <button id="creditos-volver-bottom" class="hov-sfx volver-inicio-btn volver-inicio-btn-bottom" onclick="goTo('novelas')" style="display:none;">
+        <span class="t-es">⬅ Volver a Inicio</span><span class="t-en">⬅ Back to Home</span><span class="t-ja">⬅ ホームに戻る</span>
+      </button>
     </div>
   </div>
 
   <!-- SOBRE MÍ -->
-  <div id="sobre-mi">
+  <div id="sobre-mi" style="display:none;">
     <div class="section-inner" style="padding-bottom: 3rem;">
+      <button class="hov-sfx volver-inicio-btn" onclick="goTo('novelas')">
+        <span class="t-es">⬅ Volver a Inicio</span><span class="t-en">⬅ Back to Home</span><span class="t-ja">⬅ ホームに戻る</span>
+      </button>
       <h2 class="sec-title" data-i18n='{"es":"Sobre Lekim-sama","en":"About Lekim-sama","ja":"Lekim-samaについて"}'></h2>
 
       <div style="display:flex; gap: 2.5rem; align-items: flex-start; flex-wrap: wrap; margin-top: 1.5rem;">
@@ -4594,6 +4747,13 @@ function setLang(lang) {
 
   applyLang(lang);
   updateSerieCoverImages(lang);
+
+  // El texto cambia de longitud según el idioma, así que reevaluamos si
+  // el contenido sigue cabiendo en una sola pantalla (solo aplica fuera
+  // de la vista de rombos, que siempre permite scroll normal).
+  const rombosEl = document.getElementById('rombos-wrapper');
+  const rombosAbiertosEl = rombosEl && rombosEl.style.display !== 'none';
+  if (!rombosAbiertosEl) evaluateSingleScreenLock();
 }
 
 function applyLang(lang) {
@@ -4621,6 +4781,66 @@ function applyLang(lang) {
    Si en el futuro tienes varias series, puedes pasar el lema como argumento
    o leer un data-atributo del elemento para que cada serie muestre el suyo.
 */
+/*
+  Bloquea/desbloquea el scroll de la PÁGINA (no de contenedores internos).
+  Se aplica en <html> en vez de <body> para no chocar con los overflow
+  que ya gestionan los modales (que tocan document.body).
+*/
+/*
+  Salto de scroll REALMENTE instantáneo. No basta con behavior:'instant' en
+  scrollTo, porque el CSS global tiene "scroll-behavior: smooth" en <html>,
+  y algunos navegadores igualmente animan el salto — si el bloqueo de scroll
+  se activa a mitad de esa animación, la página se queda congelada a medio
+  camino (pantalla vacía/negra). Por eso desactivamos scroll-behavior por
+  completo justo antes de saltar, y lo restauramos después.
+*/
+function scrollToInstant(top = 0, left = 0) {
+  const html = document.documentElement;
+  const prevBehavior = html.style.scrollBehavior;
+  html.style.scrollBehavior = 'auto';
+  window.scrollTo(left, top);
+  // Fuerza un reflow para asegurar que el salto se aplica antes de restaurar
+  void html.offsetHeight;
+  html.style.scrollBehavior = prevBehavior;
+}
+
+function lockPageScroll() {
+  document.documentElement.style.overflow = 'hidden';
+}
+function unlockPageScroll() {
+  document.documentElement.style.overflow = '';
+}
+
+/*
+  "Inicio" y "Sobre mí" son vistas de "una sola pantalla": si el contenido
+  cabe entero en la ventana actual, no debe poder hacerse scroll. Pero si
+  la ventana es más pequeña (móvil, resolución baja, ventana redimensionada)
+  y el contenido no cabe, permitimos el scroll normal de página para poder
+  ver el resto — así evitamos que el borde inferior quede cortando texto o
+  imágenes, y que el contenido quede inaccesible por scroll bloqueado.
+  IMPORTANTE: no forzamos ninguna altura fija por CSS; el contenido
+  conserva su tamaño natural y solo decidimos si se puede o no hacer scroll.
+*/
+function evaluateSingleScreenLock() {
+  const fits = document.documentElement.scrollHeight <= window.innerHeight + 3;
+  if (fits) {
+    lockPageScroll();
+  } else {
+    unlockPageScroll();
+  }
+}
+
+// Reevalúa el bloqueo al redimensionar la ventana, solo si estamos en
+// una vista de una sola pantalla (Inicio o Sobre mí), no en rombos.
+let _resizeLockRaf = null;
+window.addEventListener('resize', () => {
+  const rombos = document.getElementById('rombos-wrapper');
+  const rombosAbiertos = rombos && rombos.style.display !== 'none';
+  if (rombosAbiertos) return;
+  if (_resizeLockRaf) cancelAnimationFrame(_resizeLockRaf);
+  _resizeLockRaf = requestAnimationFrame(evaluateSingleScreenLock);
+});
+
 function mostrarRombos() {
   stopVoz('serie-es-correcto-hover');
   hideTip();
@@ -4629,12 +4849,28 @@ function mostrarRombos() {
   const screen  = document.getElementById('series-cover-screen');
   const rombos  = document.getElementById('rombos-wrapper');
   const wrapper = document.getElementById('orden-lectura-wrapper');
+  const extras  = document.getElementById('extras');
+  const creditos = document.getElementById('creditos');
 
   screen.style.display  = 'none';
   rombos.style.display  = '';
   if (wrapper) wrapper.style.display = '';
+  if (extras) extras.style.display = '';
+  if (creditos) creditos.style.display = '';
   rombos.classList.add('entrando');
   setTimeout(() => rombos.classList.remove('entrando'), 400);
+
+  // Dentro de este flujo (rombos + extras + créditos), el botón "Volver a
+  // Inicio" de Créditos va ABAJO del todo (tras haber recorrido el resto).
+  const creditosVolverTop    = document.getElementById('creditos-volver-top');
+  const creditosVolverBottom = document.getElementById('creditos-volver-bottom');
+  if (creditosVolverTop) creditosVolverTop.style.display = 'none';
+  if (creditosVolverBottom) creditosVolverBottom.style.display = '';
+
+  // Esta vista sí tiene varias pantallas de contenido (rombos + extras + créditos),
+  // así que aquí la página vuelve a poder hacer scroll con normalidad.
+  unlockPageScroll();
+
   applyLang(currentLang);
 }
 
@@ -4642,9 +4878,13 @@ function ocultarRombos() {
   const screen  = document.getElementById('series-cover-screen');
   const rombos  = document.getElementById('rombos-wrapper');
   const wrapper = document.getElementById('orden-lectura-wrapper');
+  const extras  = document.getElementById('extras');
+  const creditos = document.getElementById('creditos');
 
   rombos.style.display  = 'none';
   if (wrapper) wrapper.style.display = 'none';
+  if (extras) extras.style.display = 'none';
+  if (creditos) creditos.style.display = 'none';
   screen.style.display  = '';
   screen.style.animation = 'none';
   void screen.offsetWidth;
@@ -4652,8 +4892,97 @@ function ocultarRombos() {
   screen.style.animationName = 'catalogFadeIn';
   screen.style.animationDuration = '0.35s';
 
+  // Volvemos a "Inicio": reset de scroll INSTANTÁNEO (no "smooth") antes
+  // de evaluar el bloqueo, para no dejar la página a medio desplazar.
+  scrollToInstant(0, 0);
+  evaluateSingleScreenLock();
+
   applyLang(currentLang);
 }
+
+/*
+  "Sobre mí" es una vista exclusiva: al abrirla se oculta todo lo demás
+  (portadas, rombos, extras, créditos), dejando solo la barra superior
+  y la sidebar visibles. Para volver, el usuario pulsa "Inicio" o el
+  botón "⬅ Volver a Inicio" de dentro de la propia sección.
+*/
+
+// Vista exclusiva actualmente abierta: 'sobre-mi', 'creditos-solo' o null.
+let vistaExclusivaActual = null;
+
+function mostrarVistaExclusiva(id) {
+  hideTip();
+  playHoverSfx();
+
+  const novelas   = document.getElementById('novelas');
+  const screen    = document.getElementById('series-cover-screen');
+  const rombos    = document.getElementById('rombos-wrapper');
+  const wrapper   = document.getElementById('orden-lectura-wrapper');
+  const extras    = document.getElementById('extras');
+  const creditos  = document.getElementById('creditos');
+  const sobreMi   = document.getElementById('sobre-mi');
+
+  // OJO: hay que ocultar la sección <section id="novelas"> ENTERA, no solo
+  // lo de dentro — esa sección tiene min-height:100vh, así que si solo se
+  // ocultan sus hijos (portadas/rombos) queda un hueco vacío de una
+  // pantalla completa antes de llegar a la vista exclusiva ("apartado negro").
+  if (novelas) novelas.style.display = 'none';
+  if (screen) screen.style.display = 'none';
+  if (rombos) rombos.style.display = 'none';
+  if (wrapper) wrapper.style.display = 'none';
+  if (extras) extras.style.display = 'none';
+  if (creditos) creditos.style.display = 'none';
+  if (sobreMi) sobreMi.style.display = 'none';
+
+  if (id === 'sobre-mi' && sobreMi) sobreMi.style.display = '';
+  if (id === 'creditos-solo' && creditos) creditos.style.display = '';
+
+  if (id === 'creditos-solo') {
+    // Acceso directo desde la barra superior: el botón "Volver a Inicio"
+    // de Créditos va ARRIBA (es el único contenido de la vista).
+    const creditosVolverTop    = document.getElementById('creditos-volver-top');
+    const creditosVolverBottom = document.getElementById('creditos-volver-bottom');
+    if (creditosVolverTop) creditosVolverTop.style.display = '';
+    if (creditosVolverBottom) creditosVolverBottom.style.display = 'none';
+  }
+
+  vistaExclusivaActual = id;
+
+  // Reset de scroll INSTANTÁNEO (no "smooth") antes de evaluar el bloqueo:
+  // si se hacía con animación, "overflow:hidden" podía llegar a aplicarse
+  // antes de que terminase de desplazarse, dejando la página congelada
+  // a mitad de scroll (pantalla negra).
+  scrollToInstant(0, 0);
+  evaluateSingleScreenLock();
+
+  applyLang(currentLang);
+}
+
+function ocultarVistaExclusiva() {
+  const novelas = document.getElementById('novelas');
+  const screen  = document.getElementById('series-cover-screen');
+  const sobreMi = document.getElementById('sobre-mi');
+  const creditos = document.getElementById('creditos');
+
+  if (vistaExclusivaActual === 'sobre-mi' && sobreMi) sobreMi.style.display = 'none';
+  if (vistaExclusivaActual === 'creditos-solo' && creditos) creditos.style.display = 'none';
+
+  if (novelas) novelas.style.display = '';
+  if (screen) screen.style.display = '';
+
+  vistaExclusivaActual = null;
+}
+
+// Estado inicial: la página carga en "Inicio" (portadas). Evaluamos si
+// el bloqueo de scroll aplica según el tamaño de ventana actual.
+evaluateSingleScreenLock();
+// Las imágenes pueden terminar de cargar después y cambiar la altura real;
+// lo reevaluamos cuando todo el contenido (incluidas imágenes) esté listo.
+window.addEventListener('load', () => {
+  const rombos = document.getElementById('rombos-wrapper');
+  const rombosAbiertos = rombos && rombos.style.display !== 'none';
+  if (!rombosAbiertos) evaluateSingleScreenLock();
+});
 
 /*
   Muestra el lema general de la colección en el cursor-tip.
@@ -4750,9 +5079,9 @@ function buildDiamonds() {
 const COLLAB_TIPS = {
   actor: [
     {
-      es: 'Sakichi fue la primera en poner voz a un tráiler y, en su momento, me entregó muchos intentos al no tener experiencia como actora de voz. Hizo la voz de Nugu, ??? y Fukou. Me ayudó también a intentar que la frase de Fukou sonara más natural.\n\nPara la voz de Fukou, aceptó en febrero y lo recibí en mayo, siendo la entrega más lenta. (Aclaración: Siempre que digo lento, no lo digo de forma negativa; no hubo problema porque yo suelo dar bastante margen: medio año o un año. Yo aún estaba trabajando con la novela). Cuando le envié un agradecimiento tras el tráiler final, no me respondió; esperemos que se encuentre bien.',
-      en: 'Sakichi was the first to voice a trailer and at the time gave me many attempts, having no experience as a voice actress. She voiced Nugu, ??? and Fukou. She also helped me try to make Fukou\'s line sound more natural.\n\nFor Fukou\'s voice, she accepted in February and I received it in May, making it the slowest delivery. (Clarification: Whenever I say slow, I don\'t mean it negatively; there was no problem because I usually give quite a lot of margin: half a year or a year. I was still working on the novel at the time). When I sent her a thank-you message after the final trailer, she didn\'t reply; let\'s hope she is doing well.',
-      ja: 'さきちさんは最初にトレーラーに声を当てた人で、当時は声優としての経験がなく、多くのテイクを送ってくれました。ヌグ、??? そしてフコウの声を担当しました。また、フコウのセリフがより自然に聞こえるよう、手伝ってくれました。\n\nフコウの声については、2月に了承を得て、受け取ったのは5月で、最も遅い納品となりました。（補足：遅いと言っても、決してネガティブな意味ではありません。私は通常かなりの余裕を持って期限を設けているため、問題はありませんでした。半年から1年ほどです。私もまだ小説の制作中でした）。最終トレーラー完成後にお礼のメッセージを送りましたが、返信はありませんでした。元気でいてくれることを願っています。'
+      es: 'Sakichi fue la primera en poner voz a un tráiler y, en su momento, me entregó muchos intentos al no tener experiencia como actora de voz. Hizo la voz de Nugu, ??? y Fukou.\n\nMe ayudó también a intentar que la frase de Fukou sonara más natural en japonés. Para la voz de Fukou, aceptó en febrero y lo recibí en mayo, siendo la voz con más meses de anticipación que pedí. (Aclaración: Con ningún colaborador tuve problemas de tiempo porque yo suelo dar bastante margen: medio año o un año. Yo aún estaba trabajando con la novela). Cuando le envié un agradecimiento tras el tráiler final, no me respondió; esperemos que se encuentre bien.',
+      en: 'Sakichi was the first to voice a trailer and at the time gave me many attempts, having no experience as a voice actress. She voiced Nugu, ??? and Fukou.\n\nShe also helped me try to make Fukou\'s line sound more natural in Japanese. For Fukou\'s voice, she accepted in February and I received it in May, making it the voice with the most months of lead time I asked for. (Clarification: I never had timing issues with any collaborator, because I usually give quite a lot of margin: half a year or a year. I was still working on the novel at the time). When I sent her a thank-you message after the final trailer, she didn\'t reply; let\'s hope she is doing well.',
+      ja: 'さきちさんは最初にトレーラーに声を当てた人で、当時は声優としての経験がなく、多くのテイクを送ってくれました。ヌグ、??? そしてフコウの声を担当しました。\n\nまた、フコウのセリフが日本語としてより自然に聞こえるよう、手伝ってくれました。フコウの声については、2月に了承を得て、受け取ったのは5月で、私がお願いした中で最も準備期間が長かった声でした。（補足：どの協力者とも時間の問題はありませんでした。私は通常かなりの余裕を持って期限を設けているためです。半年から1年ほどです。私もまだ小説の制作中でした）。最終トレーラー完成後にお礼のメッセージを送りましたが、返信はありませんでした。元気でいてくれることを願っています。'
     },
     {
       es: 'Shio, casualmente, tenía un erizo de mascota; puso voz a Menmei. Me ayudó a corregir ligeramente el texto del lema en japonés para que sonara más natural. Nadie más encajaba mejor que ella en ese papel. De vez en cuando, va publicando cuentos cortos. Por un momento me asustó cuando se fue de X, pero regresó por sentirse sola.',
@@ -5630,21 +5959,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 function goTo(id) {
   closeSidebar();
+  closeNavDropdowns();
 
-  // Si los rombos están abiertos, volver al catálogo antes de navegar
-  const rombos = document.getElementById('rombos-wrapper');
-  if (rombos && rombos.style.display !== 'none') {
-    ocultarRombos();
+  const rombos  = document.getElementById('rombos-wrapper');
+  const rombosAbiertos = rombos && rombos.style.display !== 'none';
+
+  if (id === 'sobre-mi' || id === 'creditos-solo') {
+    mostrarVistaExclusiva(id);
+    return;
   }
 
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (id === 'novelas') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (vistaExclusivaActual) {
+    ocultarVistaExclusiva();
+  }
+
+  if (id === 'extras' || id === 'creditos' || id === 'rombos') {
+    // Extras, Créditos y "Novelas" (dentro de "¿Es correcto...?") viven
+    // todos dentro de la vista de rombos de la serie. Si no está abierta,
+    // la abrimos primero (usando la única serie disponible).
+    if (!rombosAbiertos) {
+      mostrarRombos();
+    }
+  } else if (rombosAbiertos) {
+    // Para "novelas" (Inicio), si los rombos están abiertos, volvemos
+    // primero al catálogo de portadas.
+    ocultarRombos();
   } else {
-    const offset = 50;
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    // Ya estábamos en portadas (o veníamos de una vista exclusiva): reset
+    // de scroll instantáneo y reevaluamos si procede bloquear el scroll.
+    scrollToInstant(0, 0);
+    evaluateSingleScreenLock();
+  }
+
+  // "rombos" no es un id real en el DOM: el destino visual es el propio
+  // grid de rombos ('rombos-wrapper'), pero para el scroll lo tratamos
+  // igual que "novelas" (arriba del todo), porque el grid puede aparecer
+  // centrado verticalmente dentro de la sección y no pegado arriba.
+  if (id === 'novelas' || id === 'rombos') {
+    // Instantáneo (no "smooth"): evita que quede a medio desplazar si el
+    // scroll de página se bloquea justo después.
+    scrollToInstant(0, 0);
+  } else {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Esperamos un tick por si acabamos de mostrar/ocultar los rombos,
+    // para que el layout ya esté actualizado antes de medir la posición.
+    requestAnimationFrame(() => {
+      const offset = 50;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
   }
 }
 
@@ -5852,6 +6216,29 @@ function closeSidebar() {
   document.getElementById('menu-toggle').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+/* ══════════════════════ NAV — DESPLEGABLES (Novelas / ¿Es correcto...?) ══════════════════════
+   toggleNavDropdown(): abre/cierra un desplegable del nav al hacer clic (táctil/escritorio).
+   En escritorio con ratón también se abren al pasar por encima (:hover, ver CSS).
+   closeNavDropdowns(): cierra todos los desplegables abiertos del nav.
+*/
+function toggleNavDropdown(event, id) {
+  event.stopPropagation();
+  playHoverSfx();
+  const dropdown = document.getElementById(id);
+  if (!dropdown) return;
+  dropdown.classList.toggle('open');
+}
+
+function closeNavDropdowns() {
+  document.querySelectorAll('.nav-item-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-item-dropdown')) {
+    closeNavDropdowns();
+  }
+});
 
 /* ══════════════════ MODAL TRÁILER GLOBAL ══════════════════ */
 /*
