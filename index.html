@@ -2455,7 +2455,7 @@ nav {
       <div class="nav-dropdown-menu level-1">
         <div class="nav-item-dropdown" id="nav-dd-escorrecto">
           <a class="hov-sfx nav-dropdown-trigger" onclick="toggleNavDropdown(event, 'nav-dd-escorrecto')">
-            <span class="t-es">¿Es correcto...?</span><span class="t-en">Is it right...?</span><span class="t-ja">…は正しいか？</span>
+            <span class="t-es">¿Es correcto...?</span><span class="t-en">Is it right...?</span><span class="t-ja">…正しいか？</span>
             <svg class="nav-caret nav-caret-side" viewBox="0 0 6 10" xmlns="http://www.w3.org/2000/svg"><polyline points="1,1 5,5 1,9"/></svg>
           </a>
           <div class="nav-dropdown-menu level-2">
@@ -2658,7 +2658,7 @@ nav {
                   <span class="serie-cover-meta-pages">
                     <span class="t-es">113.503 palabras</span>
                     <span class="t-en">113,503 words</span>
-                    <span class="t-ja">291.259 文字</span>
+                    <span class="t-ja">292.444 文字</span>
                   </span>
                   <span class="serie-cover-meta-genres">
                     <span class="t-es">Fantasía · Misterio · Tragedia</span>
@@ -4707,7 +4707,7 @@ function setLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
 
-  const titles = { es:'¿Es correcto...?', en:'Is it right...?', ja:'…は正しいか？' };
+  const titles = { es:'¿Es correcto...?', en:'Is it right...?', ja:'…正しいか？' };
   document.title = titles[lang];
 
   ['es','en','ja'].forEach(l => {
