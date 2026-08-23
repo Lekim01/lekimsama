@@ -7754,7 +7754,7 @@ function openIllusModal() {
   hideTip();
   const grid = document.getElementById('illus-grid');
   if (!grid.hasChildNodes()) {
-    ILLUS_IMAGES = Array.from({length: 28}, (_, i) => `dibujo_${i + 1}.jpg`);
+    ILLUS_IMAGES = Array.from({length: 30}, (_, i) => `dibujo_${i + 1}.jpg`);
     ILLUS_IMAGES.forEach((src, i) => {
       const thumb = document.createElement('div');
       thumb.className = 'illus-thumb hov-sfx';
